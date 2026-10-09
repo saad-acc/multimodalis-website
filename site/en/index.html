@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Multimodalis – Pricing Engine for Transport Logistics</title>
+<meta name="description" content="Calculate, compare and optimize prices across FCL, LCL, FTL, LTL, Rail, Barge and Airfreight – including surcharges, local charges, currency conversion and multimodal combinations.">
+
+<link rel="canonical" href="https://multimodalis.com/en/">
+<link rel="alternate" hreflang="en" href="https://multimodalis.com/en/"><link rel="alternate" hreflang="de" href="https://multimodalis.com/de/"><link rel="alternate" hreflang="x-default" href="https://multimodalis.com/en/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Multimodalis"><meta property="og:title" content="Multimodalis – Pricing Engine for Transport Logistics"><meta property="og:description" content="Calculate, compare and optimize prices across FCL, LCL, FTL, LTL, Rail, Barge and Airfreight – including surcharges, local charges, currency conversion and multimodal combinations."><meta property="og:url" content="https://multimodalis.com/en/"><meta property="og:image" content="https://multimodalis.com/assets/img/multimodalis-og.png"><meta property="og:locale" content="en_US">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/multimodalis-favicon-32.png">
+<link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="preload" href="../assets/fonts/multimodalis-Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/site.css">
+<script src="../assets/js/main.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="draft-banner"><div class="container">Draft preview – not published. Placeholders marked <span class="need">[NEED: …]</span></div></div>
+
+<nav aria-label="Main" class="site-nav">
+<div class="nav-inner">
+<a class="nav-logo" href="./"><img alt="" height="32" src="../assets/logo/multimodalis-logo-64.png" width="32"/>Multimodalis</a>
+<div class="nav-links">
+<a href="#platform">Platform</a>
+<a href="#coverage">Coverage</a>
+<a href="#end-to-end">End-to-end</a>
+<a href="#how-it-works">How it works</a>
+<a href="#use-cases">Use cases</a>
+<a href="#faq">FAQ</a>
+<a href="#contact">Contact</a>
+</div>
+<div class="nav-cta"><div aria-label="Language / Sprache" class="lang-toggle" role="group"><a aria-current="true" class="lang-btn" href="../en/" hreflang="en" lang="en">EN</a><span aria-hidden="true" class="lang-sep">|</span><a class="lang-btn" href="../de/" hreflang="de" lang="de">DE</a></div>
+<a class="btn btn-primary nav-btn" href="#contact">Request Demo</a>
+</div>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="mobile-toggle" type="button"><svg aria-hidden="true" fill="none" height="22" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" width="22"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></div>
+<div id="mobile-menu">
+<a href="#platform">Platform</a>
+<a href="#coverage">Coverage</a>
+<a href="#end-to-end">End-to-end</a>
+<a href="#how-it-works">How it works</a>
+<a href="#use-cases">Use cases</a>
+<a href="#technology">Technology</a>
+<a href="#faq">FAQ</a>
+<a href="#contact">Contact</a>
+<div aria-label="Language / Sprache" class="lang-toggle mobile-lang" role="group"><a aria-current="true" class="lang-btn" href="../en/" hreflang="en" lang="en">EN</a><span aria-hidden="true" class="lang-sep">|</span><a class="lang-btn" href="../de/" hreflang="de" lang="de">DE</a></div><a class="btn btn-primary mobile-cta" href="#contact">Request Demo</a>
+</div>
+</nav>
+<main id="main">
+<section class="hero">
+<div class="container">
+<div class="grid-2">
+<div class="fade-up visible">
+<h1>
+<span>From tariffs to real prices across</span><br/>
+<span id="rotating-term">all transport modes</span>
+</h1>
+<p class="hero-sub">Calculate, compare and optimize prices across FCL, LCL, FTL, LTL, Rail, Barge and Airfreight – including surcharges, local charges, currency conversion and multimodal combinations.</p>
+<div class="hero-cta">
+<a class="btn btn-primary" href="#contact">Request Demo</a>
+<a class="btn btn-outline" href="#platform">Explore Platform</a>
+</div>
+<div class="hero-stats">
+<div class="hero-stat">
+<div class="stat-num">All transport modes</div>
+<div class="stat-label">Unified pricing logic</div>
+</div>
+<div class="hero-stat">
+<div class="stat-num">Cost transparency</div>
+<div class="stat-label">Complete prices</div>
+</div>
+<div class="hero-stat">
+<div class="stat-num mono">RFQ</div>
+<div class="stat-label">Tender ready</div>
+</div>
+</div>
+</div>
+<div class="fade-up visible hero-globe">
+<div class="globe-wrapper">
+<canvas aria-hidden="true" data-map="../assets/img/multimodalis-globe-world-fill.png" id="globe-canvas"></canvas>
+<div class="globe-labels" id="globe-labels"></div>
+<div aria-hidden="true" class="globe-legend">
+<div class="globe-legend-item"><div class="globe-legend-line legend-air"></div>Air</div>
+<div class="globe-legend-item"><div class="globe-legend-line legend-ocean"></div>Ocean</div>
+<div class="globe-legend-item"><div class="globe-legend-line legend-rail"></div>Rail</div>
+<div class="globe-legend-item"><div class="globe-legend-line legend-road"></div>Road</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="intro">
+<div class="container">
+<div class="intro-header fade-up">
+<div>
+<h2>One Platform for All Pricing Complexity</h2>
+</div>
+<p class="intro-lead">Multimodalis unifies fragmented tariff landscapes into a single, structured pricing engine — across every mode, every surcharge and every cost combination.</p>
+</div>
+<div class="grid-4 fade-up">
+<div class="platform-card">
+<div class="platform-icon">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><rect height="14" rx="2" width="20" x="2" y="3"></rect><path d="M8 21h8M12 17v4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<h4>Unify Tariffs</h4>
+<p>Bring ocean, road, rail, barge and airfreight rates into one structure and one system of record.</p>
+</div>
+<div class="platform-card">
+<div class="platform-icon">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke-linecap="round" stroke-linejoin="round"></path><path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<h4>Apply Full Cost Logic</h4>
+<p>Automatically include fuel, BAF, THC, toll, handling, pickup, drop-off, LWS and all surcharges.</p>
+</div>
+<div class="platform-card">
+<div class="platform-icon">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<h4>Compare Real Prices</h4>
+<p>Benchmark complete transport options side by side — not isolated rate sheets from separate systems.</p>
+</div>
+<div class="platform-card">
+<div class="platform-icon">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><path d="M9 11l3 3L22 4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<h4>Power Sales, Procurement and RFQ</h4>
+<p>Quote faster, buy smarter and launch tenders from one unified platform with one data foundation.</p>
+</div>
+</div>
+</div>
+</section>
+<div class="divider"></div>
+<section class="section" id="platform">
+<div class="container">
+<div class="section-header centered fade-up">
+<h2>A unified pricing engine for transport logistics</h2>
+<p>Multimodalis does not just display tariffs. It calculates real transport prices – across all transport modes, all cost elements and all relevant pricing structures.</p>
+</div>
+<div class="platform-grid fade-up">
+<div class="platform-card">
+<div class="platform-icon">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M9 17v-6h13M9 17l-4-4m4 4l-4 4M15 7V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h8a2 2 0 002-2v-2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<h4>Unified pricing engine</h4>
+<p>One pricing logic for FCL, LCL, FTL, LTL, Rail, Barge and Airfreight – all calculated in one system.</p>
+</div>
+<div class="platform-card">
+<div class="platform-icon">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-10V4m0 14v2M5 12a7 7 0 1014 0A7 7 0 005 12z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<h4>Complete cost breakdown</h4>
+<p>Include base rates, surcharges, local charges, handling, fuel, BAF, toll, LWS, terminal costs and currency conversion.</p>
+</div>
+<div class="platform-card">
+<div class="platform-icon">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M3 10h11M9 21V3m12 7h-5m0 0V5m0 5v5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<h4>Combination logic</h4>
+<p>Combine different tariffs and transport legs into one valid, optimized transport option with one total price.</p>
+</div>
+<div class="platform-card">
+<div class="platform-icon">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<h4>RFQ &amp; tender workflows</h4>
+<p>Request rates, compare supplier offers and benchmark them directly against your existing tariff landscape.</p>
+</div>
+<div class="platform-card">
+<div class="platform-icon">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M17 20h5V4H2v16h5m10 0v-8H7v8m10 0H7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<h4>Marketplace &amp; access</h4>
+<p>Share tariffs selectively, publish offers on the marketplace and manage who can see and use your pricing.</p>
+</div>
+<div class="platform-card">
+<div class="platform-icon">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<h4>High degree of automation</h4>
+<p>Automate recurring pricing logic, data imports and cost updates to reduce manual effort and speed up decisions.</p>
+</div>
+</div>
+</div>
+</section>
+<div class="divider"></div>
+<section class="section section-alt" id="coverage">
+<div class="container">
+<div class="coverage-header fade-up">
+<h2>All Transport Modes. One Pricing Logic.</h2>
+<p>Multimodalis connects pricing structures that usually live in separate spreadsheets, separate teams and separate systems.</p>
+</div>
+<div class="modes-grid fade-up">
+<div class="mode-card">
+<img alt="Container ship at sea" decoding="async" height="600" src="../assets/img/multimodalis-ocean.webp" width="800"/>
+<div class="mode-body">
+<h3>Ocean</h3>
+<p>FCL and LCL pricing including all local charges and port-specific cost logic.</p>
+</div>
+</div>
+<div class="mode-card">
+<img alt="Truck on a highway" decoding="async" height="600" src="../assets/img/multimodalis-road.webp" width="800"/>
+<div class="mode-body">
+<h3>Road</h3>
+<p>FTL and LTL rates including toll, fuel surcharges, pickup and drop-off logic.</p>
+</div>
+</div>
+<div class="mode-card">
+<img alt="Freight train" decoding="async" height="600" src="../assets/img/multimodalis-rail-barge.webp" width="800"/>
+<div class="mode-body">
+<h3>Rail &amp; Barge</h3>
+<p>Intermodal tariffs, combination legs and full terminal cost logic for inland freight.</p>
+</div>
+</div>
+<div class="mode-card">
+<img alt="Cargo aircraft" decoding="async" height="600" src="../assets/img/multimodalis-air.webp" width="800"/>
+<div class="mode-body">
+<h3>Airfreight</h3>
+<p>Airfreight rate structures including fuel surcharges, security fees and all add-ons.</p>
+</div>
+</div>
+</div>
+<div class="coverage-strip fade-up">
+<div class="cstrip-left">
+<h3>Included Pricing Components</h3>
+<div class="comp-list">
+<div class="comp-item"><span class="comp-check"><svg aria-hidden="true" fill="none" viewbox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor"></path></svg></span><span>Base rates</span></div>
+<div class="comp-item"><span class="comp-check"><svg aria-hidden="true" fill="none" viewbox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor"></path></svg></span><span>Fuel &amp; diesel</span></div>
+<div class="comp-item"><span class="comp-check"><svg aria-hidden="true" fill="none" viewbox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor"></path></svg></span>BAF / CAF / PSS</div>
+<div class="comp-item"><span class="comp-check"><svg aria-hidden="true" fill="none" viewbox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor"></path></svg></span>THC / local charges</div>
+<div class="comp-item"><span class="comp-check"><svg aria-hidden="true" fill="none" viewbox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor"></path></svg></span><span>Toll &amp; distance logic</span></div>
+<div class="comp-item"><span class="comp-check"><svg aria-hidden="true" fill="none" viewbox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor"></path></svg></span><span>Pickup / drop-off</span></div>
+<div class="comp-item"><span class="comp-check"><svg aria-hidden="true" fill="none" viewbox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor"></path></svg></span><span>Terminal &amp; handling</span></div>
+<div class="comp-item"><span class="comp-check"><svg aria-hidden="true" fill="none" viewbox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor"></path></svg></span><span>Low water surcharge</span></div>
+<div class="comp-item"><span class="comp-check"><svg aria-hidden="true" fill="none" viewbox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor"></path></svg></span><span>Minimum prices</span></div>
+<div class="comp-item"><span class="comp-check"><svg aria-hidden="true" fill="none" viewbox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor"></path></svg></span>NAC / FAK / special rates</div>
+<div class="comp-item"><span class="comp-check"><svg aria-hidden="true" fill="none" viewbox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor"></path></svg></span><span>Currency conversion</span></div>
+<div class="comp-item"><span class="comp-check"><svg aria-hidden="true" fill="none" viewbox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="currentColor"></path></svg></span><span>Customer-specific logic</span></div>
+</div>
+</div>
+<div class="cstrip-right">
+<h3>Why Complete Pricing Matters</h3>
+<p>Comparing only base rates produces misleading results. Multimodalis calculates the full cost of each transport option — making comparisons accurate and decisions defensible.</p>
+<div>
+<div class="cstat-row"><span>Transport modes supported</span><span class="cstat-val">All transport modes</span></div>
+<div class="cstat-row"><span>Cost elements per route</span><span class="cstat-val">All cost elements</span></div>
+<div class="cstat-row"><span>Currency pairs</span><span class="cstat-val">All major</span></div>
+<div class="cstat-row"><span>Combination logic</span><span class="cstat-val">Multimodal</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="divider"></div>
+<section class="section" id="end-to-end">
+<div class="container">
+<div class="section-header centered fade-up">
+<h2>Full end-to-end coverage</h2>
+<p>Connect origin, main carriage and destination pricing in one continuous transport logic.</p>
+</div>
+<p class="key-message fade-up">Multimodalis does not calculate isolated rates — it builds complete transport chains.</p>
+<div class="fade-up">
+<div class="chain-grid">
+<div class="chain-col">
+<div class="chain-phase">
+<div class="phase-badge">A</div>
+<h3 class="phase-label">Pre-carriage</h3>
+</div>
+<ul class="chain-list">
+<li>Pick-up costs</li>
+<li>Pre-carriage</li>
+<li>Pre-carriage surcharges</li>
+<li>Local charges origin</li>
+</ul>
+</div>
+<div class="chain-col main">
+<div class="chain-phase">
+<div class="phase-badge">→</div>
+<h3 class="phase-label">Main leg</h3>
+</div>
+<ul class="chain-list">
+<li>Main carriage</li>
+<li>Seafreight / Rail / Barge / Airfreight</li>
+<li>Freight</li>
+<li>Surcharges</li>
+</ul>
+</div>
+<div class="chain-col">
+<div class="chain-phase">
+<div class="phase-badge">B</div>
+<h3 class="phase-label">On-carriage</h3>
+</div>
+<ul class="chain-list">
+<li>Local charges destination</li>
+<li>On-carriage</li>
+<li>On-carriage surcharges</li>
+<li>Drop-off costs</li>
+</ul>
+</div>
+</div>
+<div class="chain-footer">
+<p>Pre-carriage, main carriage and on-carriage can be linked seamlessly across transport modes and cost elements.</p>
+</div>
+</div>
+</div>
+</section>
+<div class="divider"></div>
+<section class="section section-alt" id="how-it-works">
+<div class="container">
+<div class="section-header centered fade-up">
+<h2>From tariff data to better decisions</h2>
+<p>Multimodalis structures pricing complexity into a clear workflow – so your teams can calculate, compare and act faster.</p>
+</div>
+<div class="grid-4 fade-up">
+<div class="step-card">
+<div class="step-num">01 —</div>
+<div class="step-divider"></div>
+<h4>Import or maintain tariffs</h4>
+<p>Upload rate sheets or maintain tariffs directly in the platform – by mode, provider, region and customer logic.</p>
+</div>
+<div class="step-card">
+<div class="step-num">02 —</div>
+<div class="step-divider"></div>
+<h4>Apply pricing rules</h4>
+<p>Add surcharges, local charges, access rules, currency conversion and all relevant pricing conditions.</p>
+</div>
+<div class="step-card">
+<div class="step-num">03 —</div>
+<div class="step-divider"></div>
+<h4>Run queries or RFQs</h4>
+<p>Search routes, compare options, quote customers or request fresh offers from the market.</p>
+</div>
+<div class="step-card">
+<div class="step-num">04 —</div>
+<div class="step-divider"></div>
+<h4>Decide with full transparency</h4>
+<p>Get the best option instantly – with complete cost breakdown, valid combinations and comparable alternatives.</p>
+</div>
+</div>
+</div>
+</section>
+<div class="divider"></div>
+<section class="section" id="use-cases">
+<div class="container">
+<div class="section-header centered fade-up">
+<h2>Built for pricing teams across logistics</h2>
+<p>Whether you buy transport, sell transport or provide transport capacity – Multimodalis gives you a faster and clearer pricing process.</p>
+</div>
+<div class="grid-3 fade-up">
+<div class="usecase-card">
+<h3 class="usecase-title">Freight Forwarders</h3>
+<p>Quote faster across all transport modes and turn fragmented pricing data into structured, reliable offers.</p>
+</div>
+<div class="usecase-card">
+<h3 class="usecase-title">Procurement Teams</h3>
+<p>Benchmark suppliers, compare complete transport options and identify the real best price – not just the cheapest base rate.</p>
+</div>
+<div class="usecase-card">
+<h3 class="usecase-title">Rail, Barge &amp; Truck Operators</h3>
+<p>Make your tariffs visible, structured and comparable – and connect your capacity directly with the right demand.</p>
+</div>
+<div class="usecase-card">
+<h3 class="usecase-title">Sales Teams</h3>
+<p>Respond faster to spot requests, create transparent customer quotes and protect margin through better pricing visibility.</p>
+</div>
+<div class="usecase-card">
+<h3 class="usecase-title">Tender Management</h3>
+<p>Launch RFQs, collect offers and evaluate them in the context of your existing tariff and provider network.</p>
+</div>
+<div class="usecase-card">
+<h3 class="usecase-title">Platform Ecosystems</h3>
+<p>Use marketplace and access-control logic to create controlled visibility between tariff owners and demand-side users.</p>
+</div>
+</div>
+</div>
+</section>
+<div class="divider"></div>
+<section class="section section-alt" id="technology">
+<div class="container">
+<div class="section-header centered fade-up">
+<h2>Enterprise-ready for operational pricing</h2>
+<p>Multimodalis is built for business-critical transport pricing workflows – secure, scalable and ready to integrate into existing processes.</p>
+</div>
+<div class="fade-up">
+<div class="tech-grid">
+<div class="tech-card">
+<h4>Web-based application</h4>
+<p>No local installation. Access pricing workflows securely through your browser.</p>
+</div>
+<div class="tech-card">
+<h4>API interfaces &amp; data import</h4>
+<p>Connect external systems and import tariff data efficiently for scalable maintenance.</p>
+</div>
+<div class="tech-card">
+<h4>Role-based access control</h4>
+<p>Define exactly who can view, maintain, release or request pricing data.</p>
+</div>
+<div class="tech-card">
+<h4>GDPR-aligned hosting</h4>
+<p>European hosting and security-conscious infrastructure for professional logistics use cases.</p>
+</div>
+</div>
+<div class="stat-bar">
+<div class="stat-bar-item">
+<div class="stat-bar-num">Web</div>
+<div class="stat-bar-label">No local installation</div>
+</div>
+<div class="stat-bar-item">
+<div class="stat-bar-num">API</div>
+<div class="stat-bar-label">Integration-ready</div>
+</div>
+<div class="stat-bar-item">
+<div class="stat-bar-num">RBAC</div>
+<div class="stat-bar-label">Granular rights logic</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="divider"></div>
+<section class="section" id="faq">
+<div class="container container-narrow">
+<div class="section-header centered fade-up">
+<h2>Frequently asked questions</h2>
+</div>
+<div class="fade-up">
+<div class="faq-item">
+<button aria-expanded="false" class="faq-toggle" type="button">
+<span>Which transport modes can be managed in Multimodalis?</span>
+<svg aria-hidden="true" class="faq-icon" viewbox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+<div class="faq-content">Multimodalis is designed for FCL, LCL, FTL, LTL, Rail, Barge and Airfreight. It can also combine multiple transport legs into one valid pricing result.</div>
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-toggle" type="button">
+<span>Does Multimodalis calculate only tariffs or complete prices?</span>
+<svg aria-hidden="true" class="faq-icon" viewbox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+<div class="faq-content">Multimodalis calculates complete prices. Base rates, surcharges, local charges, currency conversion and further pricing logic are included in the final result.</div>
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-toggle" type="button">
+<span>Can Multimodalis be used for procurement and sales?</span>
+<svg aria-hidden="true" class="faq-icon" viewbox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+<div class="faq-content">Yes. Procurement teams can benchmark supplier pricing, while sales teams can calculate transparent customer offers and respond faster to rate requests.</div>
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-toggle" type="button">
+<span>Can providers share tariffs selectively?</span>
+<svg aria-hidden="true" class="faq-icon" viewbox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+<div class="faq-content">Yes. Multimodalis includes access-control logic so tariffs can be released to specific customers, teams or marketplace users.</div>
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-toggle" type="button">
+<span>How are tariffs and surcharges maintained?</span>
+<svg aria-hidden="true" class="faq-icon" viewbox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+<div class="faq-content">Depending on the setup, tariffs can be imported, maintained by your team or managed jointly with Multimodalis. The platform is designed for scalable maintenance workflows.</div>
+</div>
+</div>
+</div>
+</section>
+<div class="divider"></div>
+<section class="section" id="contact">
+<div class="container">
+<div class="section-header centered fade-up">
+<h2>See how Multimodalis fits your pricing process</h2>
+<p>Request a demo and explore how Multimodalis can structure complex tariff landscapes, automate price logic and improve commercial decisions.</p>
+</div>
+<div class="contact-inner fade-up">
+<div class="grid-2 contact-grid">
+<div>
+<h3 class="why-title">Why teams choose Multimodalis</h3>
+<div class="why-list">
+<div class="why-item"><span class="why-dash">—</span><span>Replace Excel-based pricing with one structured system</span></div>
+<div class="why-item"><span class="why-dash">—</span><span>Compare complete prices instead of isolated tariffs</span></div>
+<div class="why-item"><span class="why-dash">—</span><span>Increase transparency for sales, procurement and operations</span></div>
+<div class="why-item"><span class="why-dash">—</span><span>Scale tariff maintenance, RFQ workflows and provider access</span></div>
+</div>
+<div class="tagline-box">
+<div class="tagline-box-name">Multimodalis</div>
+<p>One platform for pricing complexity across transport logistics.</p>
+</div>
+</div>
+<div class="form-box">
+<h3>Request a demo</h3>
+<form aria-describedby="form-note" id="contact-form"><p class="form-note" id="form-note">Demo requests are not active yet: the form endpoint is still to be decided. Contact e-mail: <span class="need">[NEED: contact email / form endpoint (Saad)]</span></p><fieldset class="form-fieldset" disabled="">
+<div class="form-row form-field">
+<div>
+<label class="field-label" for="name">Name *</label>
+<input class="field-input" id="name" name="name" placeholder="" required="" type="text"/>
+</div>
+<div>
+<label class="field-label" for="company">Company *</label>
+<input class="field-input" id="company" name="company" placeholder="" required="" type="text"/>
+</div>
+</div>
+<div class="form-row form-field">
+<div>
+<label class="field-label" for="email">E-Mail *</label>
+<input class="field-input" id="email" name="email" placeholder="" required="" type="email"/>
+</div>
+<div>
+<label class="field-label" for="phone">Phone</label>
+<input class="field-input" id="phone" name="phone" placeholder="" type="tel"/>
+</div>
+</div>
+<div class="form-field">
+<label class="field-label" for="message">Message</label>
+<textarea class="field-input" id="message" name="message" placeholder="Tell us about your pricing setup, modes, regions or current challenges..." rows="4"></textarea>
+</div>
+<button class="submit-btn" type="submit">Send Request</button>
+</fieldset></form>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container">
+<div class="footer-inner">
+<div class="footer-brand">
+<div class="footer-brand-name"><img alt="" height="28" src="../assets/logo/multimodalis-logo-64.png" width="28"/>Multimodalis</div>
+<p>Your intelligent platform for multimodal transport tariffs. More transparency, more profit, more business.</p>
+</div>
+<div>
+<div class="footer-col-title">Quick links</div>
+<ul class="footer-links">
+<li><a href="#platform">Platform</a></li>
+<li><a href="#use-cases">Use cases</a></li>
+<li><a href="#technology">Technology</a></li>
+<li><a href="#faq">FAQ</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</div>
+<div>
+<div class="footer-col-title">Contact</div>
+<a class="footer-contact-link" href="#contact">
+<span>Request Demo</span>
+<svg aria-hidden="true" fill="none" height="12" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" width="12"><path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</a>
+</div>
+</div>
+<div class="footer-bottom">
+<div class="footer-copy">© <span id="footer-year">2026</span> Multimodalis GmbH  ·  <a href="../en/imprint/">Imprint</a>  ·  <a href="../en/privacy/">Privacy policy</a></div>
+<div class="footer-motto">More transparency. More profit. More business.</div>
+</div>
+</div>
+</footer>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "name": "Multimodalis GmbH", "url": "https://multimodalis.com", "logo": "https://multimodalis.com/assets/logo/multimodalis-logo-512.png"}, {"@type": "SoftwareApplication", "name": "Multimodalis", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "en", "description": "Calculate, compare and optimize prices across FCL, LCL, FTL, LTL, Rail, Barge and Airfreight – including surcharges, local charges, currency conversion and multimodal combinations."}, {"@type": "FAQPage", "inLanguage": "en", "mainEntity": [{"@type": "Question", "name": "Which transport modes can be managed in Multimodalis?", "acceptedAnswer": {"@type": "Answer", "text": "Multimodalis is designed for FCL, LCL, FTL, LTL, Rail, Barge and Airfreight. It can also combine multiple transport legs into one valid pricing result."}}, {"@type": "Question", "name": "Does Multimodalis calculate only tariffs or complete prices?", "acceptedAnswer": {"@type": "Answer", "text": "Multimodalis calculates complete prices. Base rates, surcharges, local charges, currency conversion and further pricing logic are included in the final result."}}, {"@type": "Question", "name": "Can Multimodalis be used for procurement and sales?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Procurement teams can benchmark supplier pricing, while sales teams can calculate transparent customer offers and respond faster to rate requests."}}, {"@type": "Question", "name": "Can providers share tariffs selectively?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Multimodalis includes access-control logic so tariffs can be released to specific customers, teams or marketplace users."}}, {"@type": "Question", "name": "How are tariffs and surcharges maintained?", "acceptedAnswer": {"@type": "Answer", "text": "Depending on the setup, tariffs can be imported, maintained by your team or managed jointly with Multimodalis. The platform is designed for scalable maintenance workflows."}}]}]}</script>
+<script src="../assets/js/three.r128.min.js" defer></script>
+<script src="../assets/js/globe.js" defer></script>
+</body>
+</html>
