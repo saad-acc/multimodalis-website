@@ -810,6 +810,12 @@ h2 { font-size: clamp(1.75rem, 1.2rem + 2.2vw, 2.6rem); }
 .stat-bar { grid-template-columns: repeat(4, minmax(0,1fr)); }
 @media (max-width: 1024px) { .stat-bar { grid-template-columns: repeat(2, minmax(0,1fr)); } }
 @media (max-width: 640px) { .stat-bar { grid-template-columns: 1fr; } }
-.stat-bar-num { font-size: 1.3rem; overflow-wrap: anywhere; }
+.stat-bar-num { overflow-wrap: anywhere; }
 .cstat-val { text-align: right; }
 .cstat-row { gap: 16px; }
+/* v3 sections (2026-10-10): offers/capacity + working together */
+.feature-block h3 { font-size: 1.25rem; margin-bottom: 16px; }
+.feature-block .chain-list li { font-size: 0.9rem; }
+.chain-list.numbered { counter-reset: step; }
+.chain-list.numbered li::before { counter-increment: step; content: counter(step); font-family: var(--font-mono); color: var(--primary); font-size: 0.85rem; min-width: 1.2em; }
+.feature-cta { margin-top: 24px; }
