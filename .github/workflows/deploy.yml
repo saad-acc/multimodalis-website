@@ -1,9 +1,9 @@
 # GitHub Pages deploy for the static site in ./site (no build step).
-# NOT active yet: Pages is not enabled and publishing is not approved.
-# Only manual runs for now; add `push: branches: [main]` once Saad approves publishing
-# and Pages (Settings -> Pages -> Source: GitHub Actions) is enabled.
+# Publishing approved by Saad 2026-10-09 22:35. Pages source: GitHub Actions.
 name: Deploy to GitHub Pages
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read

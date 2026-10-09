@@ -1,7 +1,7 @@
 # Multimodalis website
 
 Static marketing site for **Multimodalis** (Multimodalis GmbH), EN + DE.
-Status: **DRAFT — not published.** GitHub Pages is not enabled and no domain is configured; publishing needs Saad's explicit approval.
+Live (approved by Saad 2026-10-09): https://saad-acc.github.io/multimodalis-website/ — deployed by GitHub Actions on every push to `main`. Content is still DRAFT (visible [NEED] placeholders). Canonical future domain: **multimodalis.com (non-www)** — not configured yet (no DNS, no CNAME).
 
 ## Structure
 ```
@@ -18,20 +18,20 @@ site/                     # deployable static output (plain HTML/CSS/JS, no buil
 DESIGN.md  PRODUCT.md  tokens.json  .agents/  .pagemaster/brand   # brand mirrors (registry is the source of truth)
 qa/                       # pre-publish QA reports
 ```
-All internal links are relative, so the site works both as a project page (`/<repo>/`) and on a custom domain. Canonical/hreflang/sitemap URLs assume `https://multimodalis.com` (not configured yet).
+All internal links are relative, so the site works both as a project page (`/<repo>/`) and on a custom domain. Canonical/hreflang/OG/sitemap URLs currently use `https://saad-acc.github.io/multimodalis-website/`; switch `SITE` to `https://multimodalis.com` when the domain goes live.
 
 ## Privacy
-No cookies, no localStorage, no analytics, no third-party requests: fonts, scripts and images are all self-hosted. A Content-Security-Policy meta tag restricts everything to `'self'`. The demo form is disabled (no endpoint yet).
+No cookies, no localStorage, no analytics, no third-party requests: fonts, scripts and images are all self-hosted. A Content-Security-Policy meta tag restricts everything to `'self'`. The demo form is disabled (endpoint to be decided).
 
 ## Third-party code, fonts and assets — provenance
 | File | Source | Licence | Notes |
 |---|---|---|---|
 | `site/assets/js/three.r128.min.js` | npm `three@0.128.0` (`build/three.min.js`), downloaded 2026-10-09 | MIT, see `site/assets/js/LICENSE-three.txt` | self-hosted, no CDN |
 | `site/assets/fonts/multimodalis-Geist-Variable.woff2`, `multimodalis-GeistMono-Variable.woff2` | Geist by Vercel (official release), via the Multimodalis brand folder | SIL OFL 1.1, see `site/assets/fonts/OFL-Geist.txt` | approved by Saad 2026-10-09 |
-| `site/assets/logo/*`, `site/favicon.ico`, `site/assets/favicon/*` | Multimodalis logo + favicon supplied by Saad (chat, 2026-10-09); PNG sizes derived locally | owned by Multimodalis GmbH | logo PNG is AI-generated per its metadata |
+| `site/assets/logo/*`, `site/favicon.ico`, `site/assets/favicon/*` | Multimodalis logo + favicon supplied by Saad (chat, 2026-10-09); PNG sizes derived locally | owned by Multimodalis/Saad, confirmed 2026-10-09 | logo PNG is AI-generated per its metadata |
 | `site/assets/img/multimodalis-og.png` | derived from the logo (white 1200×630 canvas) | as logo | placeholder OG image |
-| `site/assets/img/multimodalis-ocean.webp`, `-road.webp`, `-rail-barge.webp`, `-air.webp` | reused from the predecessor product's website on Saad's instruction (chat, 2026-10-09: "replicate everything"); resized to 800×600 WebP | AI-generated images (the original files carried C2PA content credentials indicating AI generation); rights/approval: **[NEED: Saad confirm ownership/licence]** | metadata stripped by conversion |
-| `site/assets/img/multimodalis-globe-world-fill.png` | reused from the predecessor product's website on Saad's instruction (chat, 2026-10-09), unchanged | **origin and licence unknown — [NEED: Saad confirm source/licence]** | world land mask texture for the globe |
+| `site/assets/img/multimodalis-ocean.webp`, `-road.webp`, `-rail-barge.webp`, `-air.webp` | reused from the predecessor product's website on Saad's instruction (chat, 2026-10-09: "replicate everything"); resized to 800×600 WebP | AI-generated images (the original files carried C2PA content credentials indicating AI generation); owned by Multimodalis/Saad, confirmed 2026-10-09 | metadata stripped by conversion |
+| `site/assets/img/multimodalis-globe-world-fill.png` | reused from the predecessor product's website on Saad's instruction (chat, 2026-10-09), unchanged | owned by Multimodalis/Saad, confirmed 2026-10-09 | world land mask texture for the globe |
 
 Copy: adapted 1:1 from the predecessor product's website per Saad (chat, 2026-10-09); specific figures replaced with "all transport modes" wording.
 

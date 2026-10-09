@@ -30,7 +30,7 @@ Saad, chat, 2026-10-09 22:05: "make the palette match the logo". Values = median
 | Mode | Name | Token | Hex (was) | vs #FFFFFF | vs #000000 | White text at AA? |
 |---|---|---|---|---|---|---|
 | Road | Asphalt Graphite | `color.brand.road` | `#455161` (was #374151) | 8.07:1 | 2.60:1 | Yes |
-| Rail | [NEED: new name — "Signal Burgundy" no longer fits a pink (Saad)] | `color.brand.rail` | `#D11767` (was #8F3D56) | 5.21:1 | 4.03:1 | Yes |
+| Rail | Sensational Pink (https://www.color-name.com/hex/d11767, Saad, chat, 2026-10-09 22:35) | `color.brand.rail` | `#D11767` (was #8F3D56) | 5.21:1 | 4.03:1 | Yes |
 | Sea | Deep Ocean Cyan | `color.brand.sea` | `#0294AB` (was #007C91) | **3.60:1** | 5.83:1 | **Large text / UI only** — dark text for normal size |
 | Air | Sky Azure | `color.brand.air` | `#037AE2` (was #3A86FF) | **4.30:1** | 4.89:1 | **Large text / UI only** — dark text (black 4.89) for normal size |
 Measured 2026-10-09 (WCAG 2.x; AA = 4.5:1 normal text, 3:1 large text/UI).
