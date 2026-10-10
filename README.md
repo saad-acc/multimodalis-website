@@ -1,7 +1,7 @@
 # Multimodalis website
 
 Static marketing site for **Multimodalis** (Multimodalis GmbH), EN + DE.
-Live (approved by Saad 2026-10-09): https://saad-acc.github.io/multimodalis-website/ — deployed by GitHub Actions on every push to `main`. Content is still DRAFT (visible [NEED] placeholders). Canonical future domain: **multimodalis.com (non-www)** — not configured yet (no DNS, no CNAME).
+Live (approved by Saad 2026-10-09): https://multimodalis.com (custom domain set by Saad 2026-10-10 via CNAME; github.io URL redirects) — deployed by GitHub Actions on every push to `main`. Content is still DRAFT (visible [NEED] placeholders). Canonical domain: **multimodalis.com (non-www)**.
 
 ## Structure
 ```
@@ -18,7 +18,7 @@ site/                     # deployable static output (plain HTML/CSS/JS, no buil
 DESIGN.md  PRODUCT.md  tokens.json  .agents/  .pagemaster/brand   # brand mirrors (registry is the source of truth)
 qa/                       # pre-publish QA reports
 ```
-All internal links are relative, so the site works both as a project page (`/<repo>/`) and on a custom domain. Canonical/hreflang/OG/sitemap URLs currently use `https://saad-acc.github.io/multimodalis-website/`; switch `SITE` to `https://multimodalis.com` when the domain goes live.
+All internal links are relative, so the site works both as a project page (`/<repo>/`) and on a custom domain. Canonical/hreflang/OG/JSON-LD/sitemap/robots URLs use `https://multimodalis.com`; the 404 page uses root-absolute paths (`/assets/…`), so it only works at the domain root.
 
 ## Privacy
 No cookies, no localStorage, no analytics, no third-party requests: fonts, scripts and images are all self-hosted. A Content-Security-Policy meta tag restricts everything to `'self'`. The demo form is disabled (endpoint to be decided).
