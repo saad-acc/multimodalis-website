@@ -662,7 +662,7 @@ footer { background: var(--fg); color: var(--bg); padding: var(--sp-xl) 0; }
   display: block;
   width: 100%;
   height: 100%;
-  border-radius: 50%;
+  /* no border-radius: it clipped air arcs at the corners */
 }
 .globe-labels {
   position: absolute;
