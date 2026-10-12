@@ -34,6 +34,14 @@
     { name:'Santos',      lat:-23.96, lng: -46.33 }, // 14 port
     { name:'Tokyo',       lat: 35.55, lng: 139.78 }, // 15 HND
     { name:'Hong Kong',   lat: 22.31, lng: 113.92 }, // 16 HKG
+    { name:'Sydney',      lat:-33.86, lng: 151.21 }, // 17 port
+    { name:'Melbourne',   lat:-37.84, lng: 144.93 }, // 18 port
+    { name:'Durban',      lat:-29.87, lng:  31.03 }, // 19 port
+    { name:'Lagos',       lat:  6.44, lng:   3.40 }, // 20 Apapa port
+    { name:'Buenos Aires',lat:-34.60, lng: -58.37 }, // 21 port
+    { name:'Houston',     lat: 29.73, lng: -95.27 }, // 22 port
+    { name:'Vancouver',   lat: 49.29, lng:-123.11 }, // 23 port
+    { name:'Auckland',    lat:-36.84, lng: 174.77 }, // 24 port
   ];
 
   /* Surface routes use unlabelled waypoints so sea lanes stay on water and
@@ -59,13 +67,28 @@
     { mode:'road', path:[12,[42.70,23.32],[44.43,26.10],[45.75,21.23],[47.50,19.04],[50.06,19.94],13], delay:3.4 },
     // Road — Chicago → New York
     { mode:'road', path:[9,[41.50,-81.69],[40.44,-79.99],[40.27,-76.88],8], delay:5.2 },
-    // Air
-    { mode:'air', path:[2,6],  delay:0.3 },
-    { mode:'air', path:[2,8],  delay:1.8 },
-    { mode:'air', path:[10,5], delay:3.0 },
-    { mode:'air', path:[16,7], delay:4.2 },
-    { mode:'air', path:[15,9], delay:5.6 },
-    { mode:'air', path:[2,10], delay:6.8 },
+    // Sea — Singapore → Melbourne (Sunda Strait, Western Australia, Bass Strait)
+    { mode:'sea', path:[5,[-6.0,105.8],[-12.0,110.0],[-22.0,112.0],[-35.0,115.0],[-36.0,135.0],[-38.9,143.5],18], delay:1.0 },
+    // Sea — Melbourne → Sydney → Auckland (around North Cape)
+    { mode:'sea', path:[18,[-39.2,146.5],[-37.5,150.5],17,[-34.5,160.0],[-34.0,172.5],[-35.6,175.0],24], delay:3.2 },
+    // Sea — Durban → Lagos (around the Cape)
+    { mode:'sea', path:[19,[-35.0,26.0],[-36.0,18.0],[-25.0,12.0],[-10.0,8.0],[0.0,4.0],20], delay:5.0 },
+    // Sea — Lagos → Rotterdam
+    { mode:'sea', path:[20,[4.0,0.0],[4.5,-8.0],[10.0,-18.0],[20.0,-19.0],[30.0,-14.0],[38.0,-12.0],[43.5,-10.5],[48.5,-6.5],[50.0,-1.5],0], delay:0.4 },
+    // Sea — Buenos Aires → Santos
+    { mode:'sea', path:[21,[-35.5,-55.0],[-30.0,-48.0],[-25.0,-45.0],14], delay:2.6 },
+    // Sea — Houston → Rotterdam (Gulf, Florida Strait, North Atlantic)
+    { mode:'sea', path:[22,[27.5,-94.0],[24.5,-86.0],[23.8,-82.0],[25.0,-79.8],[30.0,-78.0],[40.0,-50.0],[48.5,-6.5],[50.0,-1.5],0], delay:4.4 },
+    // Sea — Vancouver → Shanghai (North Pacific)
+    { mode:'sea', path:[23,[48.3,-123.5],[48.5,-125.5],[50.0,-145.0],[48.0,-170.0],[42.0,160.0],[35.0,142.0],[33.0,140.0],6], delay:6.4 },
+    // Rail — Vancouver → Chicago (Calgary, Regina, Winnipeg, Minneapolis)
+    { mode:'rail', path:[23,[51.05,-114.07],[50.45,-104.61],[49.90,-97.14],[44.98,-93.27],9], delay:1.6 },
+    // Rail — Melbourne → Sydney (Albury, Wagga Wagga, Goulburn)
+    { mode:'rail', path:[18,[-36.08,146.92],[-35.12,147.37],[-34.75,149.72],17], delay:3.8 },
+    // Road — Houston → Chicago (Dallas, Tulsa, St. Louis)
+    { mode:'road', path:[22,[32.78,-96.80],[36.15,-95.99],[38.63,-90.20],9], delay:2.0 },
+    // Road — Durban → Johannesburg
+    { mode:'road', path:[19,[-29.60,30.38],[-28.56,29.78],[-26.20,28.05]], delay:4.8 },
   ];
 
   /* Brand mode colors (tokens.json color.brand.*). speed = radians of arc per second. */
@@ -75,6 +98,10 @@
     rail: { color: 0xD11767, speed: 0.42, trail: 0.16 },
     road: { color: 0x455161, speed: 0.30, trail: 0.20 },
   };
+  /* Air: AIR_SLOTS concurrent aircraft (same count/stagger as before), each trip picks a random
+     A→B pair from CITIES; pairs < ~1500 km or near-antipodal (> ~17,800 km) are skipped. */
+  const AIR_SLOTS = [0.3, 1.8, 3.0, 4.2, 5.6, 6.8];
+  const AIR_MIN_ANG = 1500 / 6371, AIR_MAX_ANG = 2.8;
   const SURFACE_R = 1.008;   // just above the sphere (tessellation-safe, no z-fighting)
   const AIR_MAX_H = 0.26;    // highest air arc above surface; camera framing below keeps R+this inside the canvas
 
@@ -215,57 +242,81 @@
     }
     return { pts, len };
   }
-  const headGeo = new THREE.SphereGeometry(0.024, 12, 10);
-  const RADIAL = 6, IDX_PER_SEG = RADIAL * 6;
-  function tube(curve, segs, radius) {
-    return new THREE.TubeGeometry(curve, segs, radius, RADIAL, false);
+  /* Trail = tube whose fragment shader shows only [head - len, head] along the path (uv.x),
+     alpha ramps 0.10 (tail) → 1.0 (head). No static base line, no head dot. */
+  const RADIAL = 6;
+  const TRAIL_R = 0.011, CASING_R = 0.0175;
+  const trailVS = 'varying float vU; void main(){ vU = uv.x; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }';
+  const trailFS = 'uniform vec3 uColor; uniform float uHead, uLen, uFade, uMax; varying float vU;' +
+    'void main(){ float t = (vU - (uHead - uLen)) / uLen; if (t < 0.0 || t > 1.0) discard;' +
+    ' gl_FragColor = vec4(uColor, mix(0.10, 1.0, t) * uMax * uFade); }';
+  function trailMaterial(color, max) {
+    return new THREE.ShaderMaterial({
+      uniforms: { uColor: { value: new THREE.Color(color) }, uHead: { value: 0 }, uLen: { value: 0.2 }, uFade: { value: 0 }, uMax: { value: max } },
+      vertexShader: trailVS, fragmentShader: trailFS, transparent: true, depthWrite: false, depthTest: true,
+    });
   }
-  function buildRoute(r) {
+  function makeTrail(r) {
     const cfg = MODE_CFG[r.mode];
     const { pts, len } = buildPoints(r);
     const curve = new THREE.CatmullRomCurve3(pts);
     const segs = pts.length - 1;
-    // faint full lane (light casing + colored core) — WebGL ignores line widths, so use thin tubes
-    const casing = new THREE.Mesh(tube(curve, segs, 0.0104),
-      new THREE.MeshBasicMaterial({ color: 0xFFFFFF, transparent: true, opacity: REDUCED ? 0.8 : 0.45, depthWrite: false }));
-    casing.renderOrder = 2;
-    globeOverlay.add(casing);
-    const baseMat = new THREE.MeshBasicMaterial({ color: cfg.color, transparent: true, opacity: REDUCED ? 0.9 : 0.45, depthWrite: false });
-    const base = new THREE.Mesh(tube(curve, segs, 0.0056), baseMat);
-    base.renderOrder = 2;
-    globeOverlay.add(base);
-    const route = { pts, n: pts.length, segs, cfg, delay: r.delay, duration: len / cfg.speed + 0.6 };
-    if (REDUCED) return route;
-    // travelling comet: brighter, thicker tube revealed with an index draw range + head dot
-    const trailMat = new THREE.MeshBasicMaterial({ color: cfg.color, transparent: true, opacity: 1, depthWrite: false });
-    const trail = new THREE.Mesh(tube(curve, segs, 0.011), trailMat);
-    trail.renderOrder = 3;
-    trail.geometry.setDrawRange(0, 0);
-    globeOverlay.add(trail);
-    const headMat = new THREE.MeshBasicMaterial({ color: cfg.color, transparent: true, opacity: 1 });
-    const head = new THREE.Mesh(headGeo, headMat);
-    head.renderOrder = 3;
-    head.visible = false;
-    globeOverlay.add(head);
-    Object.assign(route, { trail, trailMat, head, headMat });
-    return route;
+    const geo = new THREE.TubeGeometry(curve, segs, TRAIL_R, RADIAL, false);
+    const mat = trailMaterial(cfg.color, 1.0);
+    const mesh = new THREE.Mesh(geo, mat); mesh.renderOrder = 4;
+    // white casing only around the moving trail (readability of Road on dark land)
+    const cgeo = new THREE.TubeGeometry(curve, segs, CASING_R, RADIAL, false);
+    const cmat = trailMaterial(0xFFFFFF, 0.55);
+    const casing = new THREE.Mesh(cgeo, cmat); casing.renderOrder = 3;
+    return { mesh, casing, mats: [mat, cmat], cfg, len, duration: len / cfg.speed + 0.6 };
   }
-  const routes = ROUTES.map(buildRoute);
+  function disposeTrail(t) {
+    globeOverlay.remove(t.mesh); globeOverlay.remove(t.casing);
+    t.mesh.geometry.dispose(); t.casing.geometry.dispose(); t.mats.forEach(m => m.dispose());
+  }
 
+  const routes = [];
+  if (!REDUCED) {   // reduced motion: no routes at all (static globe + city markers only)
+    ROUTES.forEach(r => {
+      const t = makeTrail(r);
+      globeOverlay.add(t.casing); globeOverlay.add(t.mesh);
+      routes.push(Object.assign(t, { delay: r.delay }));
+    });
+    AIR_SLOTS.forEach(delay => routes.push({ air: true, delay, cur: null, start: delay }));
+  }
+
+  function randomAirPath() {
+    for (let k = 0; k < 50; k++) {
+      const a = Math.floor(Math.random() * CITIES.length), b = Math.floor(Math.random() * CITIES.length);
+      if (a === b) continue;
+      const ang = toVec(a).angleTo(toVec(b));
+      if (ang >= AIR_MIN_ANG && ang <= AIR_MAX_ANG) return [a, b];
+    }
+    return [2, 6];
+  }
+  function newAirTrip(rt, now) {
+    if (rt.cur) disposeTrail(rt.cur);
+    rt.cur = makeTrail({ mode: 'air', path: randomAirPath() });
+    globeOverlay.add(rt.cur.casing); globeOverlay.add(rt.cur.mesh);
+    rt.start = now;
+  }
+
+  const GAP = 1.2;
+  function setTrail(t, cycle) {
+    const p = Math.min(cycle / t.duration, 1);
+    const fade = cycle > t.duration ? Math.max(0, 1 - (cycle - t.duration) / GAP) : 1;
+    t.mats.forEach(m => { m.uniforms.uHead.value = p; m.uniforms.uLen.value = t.cfg.trail; m.uniforms.uFade.value = fade; });
+  }
   function updateRoute(rt, clock) {
-    if (REDUCED) return;
+    if (rt.air) {
+      if (clock < rt.delay) return;
+      if (!rt.cur || clock - rt.start > rt.cur.duration + GAP) newAirTrip(rt, clock);
+      setTrail(rt.cur, clock - rt.start);
+      return;
+    }
     const elapsed = clock - rt.delay;
-    if (elapsed < 0) { rt.head.visible = false; rt.trail.geometry.setDrawRange(0, 0); return; }
-    const cycle = elapsed % (rt.duration + 1.2);
-    const p = Math.min(cycle / rt.duration, 1);           // head progress 0..1
-    const trailN = Math.max(3, Math.round(rt.cfg.trail * rt.segs));
-    const headIdx = Math.round(p * rt.segs);
-    const tailIdx = Math.max(0, headIdx - trailN);
-    rt.trail.geometry.setDrawRange(tailIdx * IDX_PER_SEG, (headIdx - tailIdx) * IDX_PER_SEG);
-    const fade = cycle > rt.duration ? Math.max(0, 1 - (cycle - rt.duration) / 1.2) : 1;
-    rt.trailMat.opacity = 0.95 * fade;
-    rt.head.visible = p < 1;
-    rt.head.position.copy(rt.pts[headIdx]);
+    if (elapsed < 0) { rt.mats.forEach(m => { m.uniforms.uFade.value = 0; }); return; }
+    setTrail(rt, elapsed % (rt.duration + GAP));
   }
 
   /* ── Mouse drag ── */
