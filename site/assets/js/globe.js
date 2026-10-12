@@ -215,7 +215,7 @@
     }
     return { pts, len };
   }
-  const headGeo = new THREE.SphereGeometry(0.016, 12, 10);
+  const headGeo = new THREE.SphereGeometry(0.024, 12, 10);
   const RADIAL = 6, IDX_PER_SEG = RADIAL * 6;
   function tube(curve, segs, radius) {
     return new THREE.TubeGeometry(curve, segs, radius, RADIAL, false);
@@ -226,19 +226,19 @@
     const curve = new THREE.CatmullRomCurve3(pts);
     const segs = pts.length - 1;
     // faint full lane (light casing + colored core) — WebGL ignores line widths, so use thin tubes
-    const casing = new THREE.Mesh(tube(curve, segs, 0.0052),
+    const casing = new THREE.Mesh(tube(curve, segs, 0.0104),
       new THREE.MeshBasicMaterial({ color: 0xFFFFFF, transparent: true, opacity: REDUCED ? 0.8 : 0.45, depthWrite: false }));
     casing.renderOrder = 2;
     globeOverlay.add(casing);
     const baseMat = new THREE.MeshBasicMaterial({ color: cfg.color, transparent: true, opacity: REDUCED ? 0.9 : 0.45, depthWrite: false });
-    const base = new THREE.Mesh(tube(curve, segs, 0.0028), baseMat);
+    const base = new THREE.Mesh(tube(curve, segs, 0.0056), baseMat);
     base.renderOrder = 2;
     globeOverlay.add(base);
     const route = { pts, n: pts.length, segs, cfg, delay: r.delay, duration: len / cfg.speed + 0.6 };
     if (REDUCED) return route;
     // travelling comet: brighter, thicker tube revealed with an index draw range + head dot
     const trailMat = new THREE.MeshBasicMaterial({ color: cfg.color, transparent: true, opacity: 1, depthWrite: false });
-    const trail = new THREE.Mesh(tube(curve, segs, 0.0055), trailMat);
+    const trail = new THREE.Mesh(tube(curve, segs, 0.011), trailMat);
     trail.renderOrder = 3;
     trail.geometry.setDrawRange(0, 0);
     globeOverlay.add(trail);
