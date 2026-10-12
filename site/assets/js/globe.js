@@ -14,82 +14,117 @@
     );
   }
 
-  /* Route endpoints (labelled). Real coordinates of well-known ports / airports / rail hubs.
-     Decorative only: no claim that Multimodalis runs these lanes. */
+  /* Route endpoints. Real coordinates of well-known ports / airports / hubs.
+     hub:true = inland route endpoint: no label, no marker, not an air endpoint (keeps the globe uncluttered).
+     Decorative only: no claim that Multimodalis runs these lanes. Corridor sources: land-routes-research-2026-10-12.md */
   const CITIES = [
-    { name:'Rotterdam',   lat: 51.95, lng:   4.14 }, // 0  port
-    { name:'Hamburg',     lat: 53.54, lng:   9.97 }, // 1  port / rail hub
-    { name:'Frankfurt',   lat: 50.03, lng:   8.57 }, // 2  FRA airport
-    { name:'Duisburg',    lat: 51.43, lng:   6.76 }, // 3  inland port / rail hub
-    { name:'Chengdu',     lat: 30.66, lng: 104.07 }, // 4  rail hub
-    { name:'Singapore',   lat:  1.26, lng: 103.82 }, // 5  port
-    { name:'Shanghai',    lat: 30.63, lng: 122.06 }, // 6  Yangshan port
-    { name:'Los Angeles', lat: 33.74, lng:-118.27 }, // 7  port of LA
-    { name:'New York',    lat: 40.64, lng: -73.78 }, // 8  JFK
-    { name:'Chicago',     lat: 41.88, lng: -87.63 }, // 9  rail hub
-    { name:'Dubai',       lat: 25.25, lng:  55.36 }, // 10 DXB
-    { name:'Milan',       lat: 45.46, lng:   9.19 }, // 11
-    { name:'Istanbul',    lat: 41.01, lng:  28.98 }, // 12
-    { name:'Warsaw',      lat: 52.23, lng:  21.01 }, // 13
-    { name:'Santos',      lat:-23.96, lng: -46.33 }, // 14 port
-    { name:'Tokyo',       lat: 35.55, lng: 139.78 }, // 15 HND
-    { name:'Hong Kong',   lat: 22.31, lng: 113.92 }, // 16 HKG
-    { name:'Sydney',      lat:-33.86, lng: 151.21 }, // 17 port
-    { name:'Melbourne',   lat:-37.84, lng: 144.93 }, // 18 port
-    { name:'Durban',      lat:-29.87, lng:  31.03 }, // 19 port
-    { name:'Lagos',       lat:  6.44, lng:   3.40 }, // 20 Apapa port
-    { name:'Buenos Aires',lat:-34.60, lng: -58.37 }, // 21 port
-    { name:'Houston',     lat: 29.73, lng: -95.27 }, // 22 port
-    { name:'Vancouver',   lat: 49.29, lng:-123.11 }, // 23 port
-    { name:'Auckland',    lat:-36.84, lng: 174.77 }, // 24 port
+    { name:'Rotterdam',   lat: 51.95, lng:   4.14 },
+    { name:'Hamburg',     lat: 53.54, lng:   9.97 },
+    { name:'Frankfurt',   lat: 50.03, lng:   8.57 },
+    { name:'Duisburg',    lat: 51.43, lng:   6.76 },
+    { name:'Chengdu',     lat: 30.66, lng: 104.07 },
+    { name:'Singapore',   lat:  1.26, lng: 103.82 },
+    { name:'Shanghai',    lat: 30.63, lng: 122.06 },
+    { name:'Los Angeles', lat: 33.74, lng:-118.27 },
+    { name:'New York',    lat: 40.64, lng: -73.78 },
+    { name:'Chicago',     lat: 41.88, lng: -87.63 },
+    { name:'Dubai',       lat: 25.25, lng:  55.36 },
+    { name:'Milan',       lat: 45.46, lng:   9.19 },
+    { name:'Istanbul',    lat: 41.01, lng:  28.98 },
+    { name:'Warsaw',      lat: 52.23, lng:  21.01 },
+    { name:'Santos',      lat:-23.96, lng: -46.33 },
+    { name:'Tokyo',       lat: 35.55, lng: 139.78 },
+    { name:'Hong Kong',   lat: 22.31, lng: 113.92 },
+    { name:'Sydney',      lat:-33.86, lng: 151.21 },
+    { name:'Perth',       lat:-32.05, lng: 115.74 }, // Fremantle port
+    { name:'Durban',      lat:-29.87, lng:  31.03 },
+    { name:'Lagos',       lat:  6.44, lng:   3.40 },
+    { name:'Buenos Aires',lat:-34.60, lng: -58.37 },
+    { name:'Houston',     lat: 29.73, lng: -95.27 },
+    { name:'Vancouver',   lat: 49.29, lng:-123.11 },
+    { name:'Auckland',    lat:-36.84, lng: 174.77 },
+    { name:'Mexico City', lat: 19.43, lng: -99.13 }, // inland hub (MEX)
+    { name:'Antofagasta', lat:-23.65, lng: -70.40 }, // port
+    { name:'Cairo',       lat: 30.04, lng:  31.24 },
+    { name:'Mombasa',     lat: -4.04, lng:  39.67 }, // port
+    { name:'Lobito',      lat:-12.35, lng:  13.55 }, // port
+    { name:'Moscow',      lat: 55.75, lng:  37.62 },
+    { name:'Vladivostok', lat: 43.12, lng: 131.89 }, // port
+    { name:'Mumbai',      lat: 18.95, lng:  72.95 }, // Nhava Sheva / JNPT
+    { name:'Bandar Abbas',lat: 27.19, lng:  56.27 }, // port
+    { name:'Halifax',     lat: 44.65, lng: -63.57 }, // port
+    // unlabelled inland hubs
+    { name:'Johannesburg',lat:-26.21, lng:  28.07, hub:true },
+    { name:'Pretoria',    lat:-25.75, lng:  28.19, hub:true },
+    { name:'Nairobi',     lat: -1.29, lng:  36.82, hub:true },
+    { name:'Kolwezi',     lat:-10.72, lng:  25.47, hub:true },
+    { name:'Delhi',       lat: 28.55, lng:  77.55, hub:true }, // Dadri
+    { name:'Astrakhan',   lat: 46.35, lng:  48.04, hub:true },
+    { name:'Laredo',      lat: 27.51, lng: -99.51, hub:true },
+    { name:'Minneapolis', lat: 44.98, lng: -93.27, hub:true },
+    { name:'Winnipeg',    lat: 49.90, lng: -97.14, hub:true },
+    { name:'Rondonópolis',lat:-16.47, lng: -54.64, hub:true },
+    { name:'São Paulo',   lat:-23.55, lng: -46.63, hub:true },
+  ];
+  const CITY = {}; CITIES.forEach(c => { CITY[c.name] = c; });
+
+  /* Surface route pool. Waypoints keep sea lanes on water and road/rail on land. */
+  const ROUTES = [
+    // ── Sea
+    { mode:'sea', path:['Rotterdam',[50.0,-1.5],[48.5,-6.5],[43.0,-10.0],[36.0,-6.5],[36.0,-5.4],[37.3,11.0],[33.0,25.0],[31.3,32.3],[27.5,33.9],[20.0,38.5],[12.6,43.4],[12.0,51.0],[8.0,60.0],[5.6,80.6],[6.0,95.0],'Singapore'] },
+    { mode:'sea', path:['Shanghai',[33.0,140.0],[42.0,165.0],[44.0,-170.0],[40.0,-140.0],'Los Angeles'] },
+    { mode:'sea', path:['Rotterdam',[50.0,-1.5],[49.5,-6.0],[41.5,-50.0],[40.3,-72.0],[40.6,-73.9]] },
+    { mode:'sea', path:['Santos',[-20.0,-38.0],[-5.0,-33.0],[15.0,-27.0],[38.0,-14.0],[43.5,-10.5],[48.5,-6.5],[50.0,-1.5],'Rotterdam'] },
+    { mode:'sea', path:['Singapore',[-6.0,105.8],[-12.0,110.0],[-22.0,112.0],[-30.0,113.6],'Perth'] },
+    { mode:'sea', path:['Sydney',[-34.5,160.0],[-34.0,172.5],[-35.6,175.0],'Auckland'] },
+    { mode:'sea', path:['Durban',[-35.0,26.0],[-36.0,18.0],[-25.0,12.0],[-10.0,8.0],[0.0,4.0],'Lagos'] },
+    { mode:'sea', path:['Lagos',[4.0,0.0],[4.5,-8.0],[10.0,-18.0],[20.0,-19.0],[30.0,-14.0],[38.0,-12.0],[43.5,-10.5],[48.5,-6.5],[50.0,-1.5],'Rotterdam'] },
+    { mode:'sea', path:['Buenos Aires',[-35.5,-55.0],[-30.0,-48.0],[-25.0,-45.0],'Santos'] },
+    { mode:'sea', path:['Houston',[27.5,-94.0],[24.5,-86.0],[23.8,-82.0],[25.0,-79.8],[30.0,-78.0],[40.0,-50.0],[48.5,-6.5],[50.0,-1.5],'Rotterdam'] },
+    { mode:'sea', path:['Vancouver',[48.3,-123.5],[48.5,-125.5],[50.0,-145.0],[48.0,-170.0],[42.0,160.0],[35.0,142.0],[33.0,140.0],'Shanghai'] },
+    // ── Rail
+    { mode:'rail', path:['Duisburg','Warsaw',[52.08,23.66],[53.90,27.56],'Moscow',[55.16,61.40],[51.17,71.45],[45.20,82.40],[43.83,87.62],[36.06,103.83],'Chengdu'] },
+    { mode:'rail', path:['Hamburg',[52.37,9.73],[50.11,8.68],[48.14,11.58],[47.00,11.50],[45.44,10.99],'Milan'] },
+    { mode:'rail', path:['Chicago',[39.10,-94.58],[35.08,-106.65],[35.20,-111.65],[34.90,-117.02],'Los Angeles'] },
+    { mode:'rail', path:['Vancouver',[51.05,-114.07],[50.45,-104.61],'Winnipeg','Minneapolis','Chicago'] },
+    // Trans-Australian: Sydney → Parkes → Broken Hill → Port Augusta → Kalgoorlie → Perth
+    { mode:'rail', path:['Sydney',[-33.14,148.18],[-31.95,141.47],[-32.49,137.77],[-30.75,121.47],'Perth'] },
+    // Rumo: Rondonópolis → Campo Grande area → Campinas → Santos
+    { mode:'rail', path:['Rondonópolis',[-20.47,-54.62],[-22.91,-47.06],'Santos'] },
+    // Natcor: Durban → Pietermaritzburg → Ladysmith → Johannesburg
+    { mode:'rail', path:['Durban',[-29.60,30.38],[-28.56,29.78],'Johannesburg'] },
+    // Mombasa–Nairobi SGR
+    { mode:'rail', path:['Mombasa',[-3.40,38.56],'Nairobi'] },
+    // Lobito Corridor (Benguela Railway)
+    { mode:'rail', path:['Lobito',[-12.78,15.73],[-10.71,22.23],'Kolwezi'] },
+    // Trans-Siberian
+    { mode:'rail', path:['Moscow',[56.84,60.61],[55.03,82.92],[52.29,104.28],[48.48,135.07],'Vladivostok'] },
+    // India Western DFC
+    { mode:'rail', path:['Mumbai',[22.31,73.18],[23.02,72.57],[26.91,75.79],[28.19,76.62],'Delhi'] },
+    // ── Road
+    { mode:'road', path:['Rotterdam',[51.23,6.78],[50.94,6.96],'Frankfurt',[48.78,9.18],[47.56,7.59],[46.0,8.95],'Milan'] },
+    { mode:'road', path:['Istanbul',[42.70,23.32],[44.43,26.10],[45.75,21.23],[47.50,19.04],[50.06,19.94],'Warsaw'] },
+    { mode:'road', path:['Chicago',[41.50,-81.69],[40.44,-79.99],[40.27,-76.88],'New York'] },
+    { mode:'road', path:['Houston',[32.78,-96.80],[36.15,-95.99],[38.63,-90.20],'Chicago'] },
+    // Capricorn Bioceanic: Santos → Campo Grande → Porto Murtinho → Chaco → Pozo Hondo → Jujuy → Paso de Jama → Antofagasta
+    { mode:'road', path:['Santos',[-20.47,-54.62],[-21.70,-57.88],[-22.03,-60.62],[-22.26,-62.67],[-24.19,-65.30],[-23.24,-67.03],'Antofagasta'] },
+    // Mercosur BR-116: São Paulo → Curitiba → Porto Alegre → Uruguaiana → Rosario → Buenos Aires
+    { mode:'road', path:['São Paulo',[-25.43,-49.27],[-30.03,-51.23],[-29.75,-57.09],[-32.95,-60.65],'Buenos Aires'] },
+    // TAH 4: Cairo → Khartoum → Addis Ababa → Nairobi → Dodoma → Lusaka → Gaborone → Pretoria
+    { mode:'road', path:['Cairo',[15.50,32.56],[8.98,38.76],'Nairobi',[-6.16,35.75],[-15.39,28.32],[-24.65,25.91],'Pretoria'] },
+    // INSTC: Bandar Abbas → Tehran → Rasht → Astara → Baku → Makhachkala → Astrakhan
+    { mode:'road', path:['Bandar Abbas',[35.69,51.39],[37.28,49.58],[38.43,48.87],[40.41,49.87],[42.98,47.50],'Astrakhan'] },
+    // I-35: Laredo → San Antonio → Dallas → Oklahoma City → Kansas City → Des Moines → Minneapolis
+    { mode:'road', path:['Laredo',[29.42,-98.49],[32.78,-96.80],[35.47,-97.52],[39.10,-94.58],[41.59,-93.62],'Minneapolis'] },
+    // Trans-Canada (east): Winnipeg → Thunder Bay → Sudbury → Toronto → Montréal → Fredericton → Halifax
+    { mode:'road', path:['Winnipeg',[48.38,-89.25],[46.49,-80.99],[43.65,-79.38],[45.50,-73.57],[45.96,-66.64],'Halifax'] },
+    // Mexico: Mexico City → Querétaro → San Luis Potosí → Monterrey → Laredo (CPKC/NAFTA axis, road)
+    { mode:'road', path:['Mexico City',[20.59,-100.39],[22.15,-100.98],[25.69,-100.32],'Laredo'] },
   ];
 
-  /* Surface routes use unlabelled waypoints so sea lanes stay on water and
-     road/rail lanes stay on land. Air routes are a single arc. */
-  const ROUTES = [
-    // Sea — Rotterdam → Singapore via Channel, Gibraltar, Suez, Bab-el-Mandeb, Sri Lanka
-    { mode:'sea', path:[0,[50.0,-1.5],[48.5,-6.5],[43.0,-10.0],[36.0,-6.5],[36.0,-5.4],[37.3,11.0],[33.0,25.0],[31.3,32.3],[27.5,33.9],[20.0,38.5],[12.6,43.4],[12.0,51.0],[8.0,60.0],[5.6,80.6],[6.0,95.0],5], delay:0.0 },
-    // Sea — Shanghai → Los Angeles (North Pacific)
-    { mode:'sea', path:[6,[33.0,140.0],[42.0,165.0],[44.0,-170.0],[40.0,-140.0],7], delay:2.2 },
-    // Sea — Rotterdam → New York (via Channel, North Atlantic)
-    { mode:'sea', path:[0,[50.0,-1.5],[49.5,-6.0],[41.5,-50.0],[40.3,-72.0],[40.6,-73.9]], delay:4.0 },
-    // Sea — Santos → Rotterdam
-    { mode:'sea', path:[14,[-20.0,-38.0],[-5.0,-33.0],[15.0,-27.0],[38.0,-14.0],[43.5,-10.5],[48.5,-6.5],[50.0,-1.5],0], delay:6.0 },
-    // Rail — Duisburg → Chengdu (Europe–China land bridge, indicative)
-    { mode:'rail', path:[3,13,[52.08,23.66],[53.90,27.56],[55.75,37.62],[55.16,61.40],[51.17,71.45],[45.20,82.40],[43.83,87.62],[36.06,103.83],4], delay:0.6 },
-    // Rail — Hamburg → Milan (via Munich, Brenner, Verona)
-    { mode:'rail', path:[1,[52.37,9.73],[50.11,8.68],[48.14,11.58],[47.00,11.50],[45.44,10.99],11], delay:2.8 },
-    // Rail — Chicago → Los Angeles
-    { mode:'rail', path:[9,[39.10,-94.58],[35.08,-106.65],[35.20,-111.65],[34.90,-117.02],7], delay:4.6 },
-    // Road — Rotterdam → Frankfurt → Milan
-    { mode:'road', path:[0,[51.23,6.78],[50.94,6.96],2,[48.78,9.18],[47.56,7.59],[46.0,8.95],11], delay:1.2 },
-    // Road — Istanbul → Warsaw (via Sofia, Bucharest, Budapest, Kraków)
-    { mode:'road', path:[12,[42.70,23.32],[44.43,26.10],[45.75,21.23],[47.50,19.04],[50.06,19.94],13], delay:3.4 },
-    // Road — Chicago → New York
-    { mode:'road', path:[9,[41.50,-81.69],[40.44,-79.99],[40.27,-76.88],8], delay:5.2 },
-    // Sea — Singapore → Melbourne (Sunda Strait, Western Australia, Bass Strait)
-    { mode:'sea', path:[5,[-6.0,105.8],[-12.0,110.0],[-22.0,112.0],[-35.0,115.0],[-36.0,135.0],[-38.9,143.5],18], delay:1.0 },
-    // Sea — Melbourne → Sydney → Auckland (around North Cape)
-    { mode:'sea', path:[18,[-39.2,146.5],[-37.5,150.5],17,[-34.5,160.0],[-34.0,172.5],[-35.6,175.0],24], delay:3.2 },
-    // Sea — Durban → Lagos (around the Cape)
-    { mode:'sea', path:[19,[-35.0,26.0],[-36.0,18.0],[-25.0,12.0],[-10.0,8.0],[0.0,4.0],20], delay:5.0 },
-    // Sea — Lagos → Rotterdam
-    { mode:'sea', path:[20,[4.0,0.0],[4.5,-8.0],[10.0,-18.0],[20.0,-19.0],[30.0,-14.0],[38.0,-12.0],[43.5,-10.5],[48.5,-6.5],[50.0,-1.5],0], delay:0.4 },
-    // Sea — Buenos Aires → Santos
-    { mode:'sea', path:[21,[-35.5,-55.0],[-30.0,-48.0],[-25.0,-45.0],14], delay:2.6 },
-    // Sea — Houston → Rotterdam (Gulf, Florida Strait, North Atlantic)
-    { mode:'sea', path:[22,[27.5,-94.0],[24.5,-86.0],[23.8,-82.0],[25.0,-79.8],[30.0,-78.0],[40.0,-50.0],[48.5,-6.5],[50.0,-1.5],0], delay:4.4 },
-    // Sea — Vancouver → Shanghai (North Pacific)
-    { mode:'sea', path:[23,[48.3,-123.5],[48.5,-125.5],[50.0,-145.0],[48.0,-170.0],[42.0,160.0],[35.0,142.0],[33.0,140.0],6], delay:6.4 },
-    // Rail — Vancouver → Chicago (Calgary, Regina, Winnipeg, Minneapolis)
-    { mode:'rail', path:[23,[51.05,-114.07],[50.45,-104.61],[49.90,-97.14],[44.98,-93.27],9], delay:1.6 },
-    // Rail — Melbourne → Sydney (Albury, Wagga Wagga, Goulburn)
-    { mode:'rail', path:[18,[-36.08,146.92],[-35.12,147.37],[-34.75,149.72],17], delay:3.8 },
-    // Road — Houston → Chicago (Dallas, Tulsa, St. Louis)
-    { mode:'road', path:[22,[32.78,-96.80],[36.15,-95.99],[38.63,-90.20],9], delay:2.0 },
-    // Road — Durban → Johannesburg
-    { mode:'road', path:[19,[-29.60,30.38],[-28.56,29.78],[-26.20,28.05]], delay:4.8 },
-  ];
+  /* Frequency: same number of concurrent surface trips as before the pool grew (21 looping routes at 1aaca14).
+     Each slot picks a random not-currently-active route when its trip ends. */
+  const SURFACE_SLOTS = 21;
 
   /* Brand mode colors (tokens.json color.brand.*). speed = radians of arc per second. */
   const MODE_CFG = {
@@ -203,6 +238,7 @@
   const pGeo = new THREE.SphereGeometry(0.036, 8, 8);
   const cityMeshes = [];
   CITIES.forEach((city, ci) => {
+    if (city.hub) return;
     const pos = ll2v(city.lat, city.lng, R + 0.022);
     const pm = new THREE.MeshBasicMaterial({ color: 0x1F63CC, transparent: true, opacity: 0.30, depthTest: true });
     const pulse = new THREE.Mesh(pGeo, pm);
@@ -214,7 +250,7 @@
 
   /* ── Routes (overlay) ── */
   function toVec(p) {
-    const c = typeof p === 'number' ? CITIES[p] : { lat: p[0], lng: p[1] };
+    const c = typeof p === 'string' ? CITY[p] : { lat: p[0], lng: p[1] };
     return ll2v(c.lat, c.lng, 1).normalize();
   }
   function slerp(a, b, t) {
@@ -276,23 +312,35 @@
   }
 
   const routes = [];
+  const surfacePool = [];
+  const AIR_POOL = CITIES.filter(c => !c.hub).map(c => c.name);
   if (!REDUCED) {   // reduced motion: no routes at all (static globe + city markers only)
+    // all surface trails are built once and reused; slots only toggle them (no per-trip allocation)
     ROUTES.forEach(r => {
       const t = makeTrail(r);
+      t.active = false; t.mesh.visible = t.casing.visible = false;
       globeOverlay.add(t.casing); globeOverlay.add(t.mesh);
-      routes.push(Object.assign(t, { delay: r.delay }));
+      surfacePool.push(t);
     });
+    for (let i = 0; i < SURFACE_SLOTS; i++) routes.push({ surface: true, delay: i * 0.35, cur: null, start: 0 });
     AIR_SLOTS.forEach(delay => routes.push({ air: true, delay, cur: null, start: delay }));
+  }
+  function newSurfaceTrip(rt, now) {
+    if (rt.cur) { rt.cur.active = false; rt.cur.mesh.visible = rt.cur.casing.visible = false; }
+    const free = surfacePool.filter(t => !t.active);
+    const t = free[Math.floor(Math.random() * free.length)];
+    t.active = true; t.mesh.visible = t.casing.visible = true;
+    rt.cur = t; rt.start = now;
   }
 
   function randomAirPath() {
     for (let k = 0; k < 50; k++) {
-      const a = Math.floor(Math.random() * CITIES.length), b = Math.floor(Math.random() * CITIES.length);
+      const a = AIR_POOL[Math.floor(Math.random() * AIR_POOL.length)], b = AIR_POOL[Math.floor(Math.random() * AIR_POOL.length)];
       if (a === b) continue;
       const ang = toVec(a).angleTo(toVec(b));
       if (ang >= AIR_MIN_ANG && ang <= AIR_MAX_ANG) return [a, b];
     }
-    return [2, 6];
+    return ['Frankfurt', 'Shanghai'];
   }
   function newAirTrip(rt, now) {
     if (rt.cur) disposeTrail(rt.cur);
@@ -308,19 +356,22 @@
     t.mats.forEach(m => { m.uniforms.uHead.value = p; m.uniforms.uLen.value = t.cfg.trail; m.uniforms.uFade.value = fade; });
   }
   function updateRoute(rt, clock) {
-    if (rt.air) {
-      if (clock < rt.delay) return;
-      if (!rt.cur || clock - rt.start > rt.cur.duration + GAP) newAirTrip(rt, clock);
-      setTrail(rt.cur, clock - rt.start);
-      return;
-    }
-    const elapsed = clock - rt.delay;
-    if (elapsed < 0) { rt.mats.forEach(m => { m.uniforms.uFade.value = 0; }); return; }
-    setTrail(rt, elapsed % (rt.duration + GAP));
+    if (clock < rt.delay) return;
+    if (!rt.cur || clock - rt.start > rt.cur.duration + GAP) (rt.air ? newAirTrip : newSurfaceTrip)(rt, clock);
+    setTrail(rt.cur, clock - rt.start);
   }
 
   /* ── Mouse drag ── */
   let drag = false, prevM = {x:0,y:0}, vx = 0, vy = 0, autoRot = true;
+  /* Debug/review: ?globe=lat,lng faces that point and holds the view (no auto-rotate). */
+  let viewLock = false;
+  const vq = new URLSearchParams(location.search).get('globe');
+  if (vq && /^-?[\d.]+,-?[\d.]+$/.test(vq)) {
+    const [vlat, vlng] = vq.split(',').map(Number);
+    globeGroup.rotation.x = Math.max(-1.1, Math.min(1.1, vlat * Math.PI / 180));
+    globeGroup.rotation.y = Math.PI / 2 - (vlng + 180) * Math.PI / 180;
+    viewLock = true;
+  }
   canvas.addEventListener('mousedown', e => { drag=true; autoRot=false; prevM={x:e.clientX,y:e.clientY}; vx=vy=0; });
   window.addEventListener('mousemove', e => {
     if (!drag) return;
@@ -338,6 +389,7 @@
     if (!labelsEl) return;
     labelsEl.innerHTML = '';
     CITIES.forEach(city => {
+      if (city.hub) return;
       const p3 = ll2v(city.lat, city.lng, R + 0.022);
       const wP = p3.clone().applyMatrix4(globeGroup.matrixWorld);
       const face = wP.clone().normalize().dot(camera.position.clone().normalize());
@@ -359,7 +411,7 @@
     clock += 0.016;
     if (!drag) {
       if (!autoRot && Math.abs(vx)<0.0002 && Math.abs(vy)<0.0002) autoRot=true;
-      if (autoRot && !REDUCED) { globeGroup.rotation.y += 0.0016; }
+      if (autoRot && !REDUCED && !viewLock) { globeGroup.rotation.y += 0.0016; }
       else { vx*=0.94; vy*=0.94; globeGroup.rotation.y+=vx; globeGroup.rotation.x+=vy; globeGroup.rotation.x=Math.max(-1.1,Math.min(1.1,globeGroup.rotation.x)); }
     }
     cityMeshes.forEach(c => {
