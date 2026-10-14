@@ -22,7 +22,6 @@
 </head>
 <body>
 <a class="skip-link" href="#main">Zum Inhalt springen</a>
-<div class="draft-banner"><div class="container">Entwurfsvorschau – nicht veröffentlicht. Platzhalter markiert <span class="need">[NEED: …]</span></div></div>
 
 <nav aria-label="Hauptnavigation" class="site-nav">
 <div class="nav-inner">
@@ -67,19 +66,10 @@
 <a class="btn btn-primary" href="#contact">Demo anfragen</a>
 <a class="btn btn-outline" href="#platform">Plattform entdecken</a>
 </div>
-<div class="hero-stats">
-<div class="hero-stat">
-<div class="stat-num">Tür zu Tür</div>
-<div class="stat-label">Landed Cost, keine Basiszeile</div>
-</div>
-<div class="hero-stat">
-<div class="stat-num">Raten &amp; Zuschläge</div>
-<div class="stat-label">Lokals, Fuel, THC, FX</div>
-</div>
-<div class="hero-stat">
-<div class="stat-num">RFQ</div>
-<div class="stat-label">Tender-fähige Vergleiche</div>
-</div>
+<div class="hero-stats claims">
+<div class="hero-stat"><div class="stat-num">Eine einheitliche Pricing-Plattform</div></div>
+<div class="hero-stat"><div class="stat-num">Vollständige Kostentransparenz</div></div>
+<div class="hero-stat"><div class="stat-num">Unterstützt RFQ&nbsp;/ Ausschreibungen</div></div>
 </div>
 </div>
 <div class="fade-up visible hero-globe">
@@ -256,10 +246,10 @@ Was Multimodalis leistet
 <h3>Warum vollständige Preise wichtig sind</h3>
 <p>Der Vergleich nur von Basisraten führt zu irreführenden Ergebnissen. Multimodalis berechnet die vollen Kosten jeder Transportoption — für präzise Vergleiche und belastbare Entscheidungen.</p>
 <div>
-<div class="cstat-row"><span>Verkehrsträger</span><span class="cstat-val">See, Straße, Intermodal, Luft</span></div>
-<div class="cstat-row"><span>Kostenstapel</span><span class="cstat-val">Basis + Zuschläge + Lokals + FX</span></div>
-<div class="cstat-row"><span>Währungspaare</span><span class="cstat-val">Alle wichtigen</span></div>
-<div class="cstat-row"><span>Kombinationslogik</span><span class="cstat-val">Multimodal</span></div>
+<div class="cstat-row cstat-claim"><span class="cstat-check" aria-hidden="true"></span><span>Alle Verkehrsträger</span></div>
+<div class="cstat-row cstat-claim"><span class="cstat-check" aria-hidden="true"></span><span>Alle Kostenelemente pro Route</span></div>
+<div class="cstat-row cstat-claim"><span class="cstat-check" aria-hidden="true"></span><span>Tägliche Wechselkurse</span></div>
+<div class="cstat-row cstat-claim"><span class="cstat-check" aria-hidden="true"></span><span>Einheitliche Preislogik aller Carrier</span></div>
 </div>
 </div>
 </div>
@@ -454,23 +444,11 @@ Was Multimodalis leistet
 <p>Routing und Maut, Rheinpegel, Carrier-Fahrpläne und -Quotes, Flugpläne und KI-Anfrageanalyse — dazu CSV-Import, Excel-Export und APIs für Ihre eigenen Systeme.</p>
 </div>
 </div>
-<div class="stat-bar">
-<div class="stat-bar-item">
-<div class="stat-bar-num">Legal</div>
-<div class="stat-bar-label">DSGVO-orientiert · Server in Deutschland</div>
-</div>
-<div class="stat-bar-item">
-<div class="stat-bar-num">Compliance</div>
-<div class="stat-bar-label">Sicherheits-Frameworks</div>
-</div>
-<div class="stat-bar-item">
-<div class="stat-bar-num">RBAC</div>
-<div class="stat-bar-label">Enterprise-Rollenrechte</div>
-</div>
-<div class="stat-bar-item">
-<div class="stat-bar-num">SSO</div>
-<div class="stat-bar-label">OAuth · SAML · Enterprise SSO</div>
-</div>
+<div class="stat-bar claims">
+<div class="stat-bar-item"><div class="stat-bar-num">Made in Germany</div></div>
+<div class="stat-bar-item"><div class="stat-bar-num">Gehostet in Europa</div></div>
+<div class="stat-bar-item"><div class="stat-bar-num">DSGVO-konform</div></div>
+<div class="stat-bar-item"><div class="stat-bar-num">24/7 überwacht</div></div>
 </div>
 </div>
 </div>
@@ -574,7 +552,7 @@ Was Multimodalis leistet
 </div>
 <div class="form-box">
 <h3>Demo anfragen</h3>
-<form aria-describedby="form-note" id="contact-form"><p class="form-note" id="form-note">Demo-Anfragen sind noch nicht aktiv: Der Formular-Endpunkt ist noch offen. Kontakt-E-Mail: <span class="need">[NEED: contact email / form endpoint (Saad)]</span></p><fieldset class="form-fieldset" disabled="">
+<form aria-describedby="form-note" id="contact-form"><p class="form-note" id="form-note">Demo-Anfragen sind noch nicht aktiv: Der Formular-Endpunkt ist noch offen. Kontakt-E-Mail: <a href="mailto:info@acceltra.de">info@acceltra.de</a></p><fieldset class="form-fieldset" disabled="">
 <div class="form-row form-field">
 <div>
 <label class="field-label" for="name">Name *</label>
