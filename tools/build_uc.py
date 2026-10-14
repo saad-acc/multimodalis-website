@@ -2,7 +2,9 @@
 """Build the UC-style home pages (/en/, /de/) from the content of the main-branch pages.
 Content is extracted verbatim from origin/main:site/<lang>/index.html (no new copy is written here).
 Run from repo root:  python3 tools/build_uc.py"""
-import re, subprocess, copy
+import re, subprocess, copy, os, sys
+sys.path.insert(0, os.path.dirname(__file__))
+from claims import apply as apply_claims
 from bs4 import BeautifulSoup
 
 def src(lang):
@@ -22,7 +24,7 @@ def two_tone(html_text, tag='h2', cls='', ratio=0.45):
     return f'<{tag} class="tt {cls}">{parts}</{tag}>'
 
 def build(lang):
-    raw = src(lang)
+    raw, _n = apply_claims(src(lang), lang)  # Saad's claim wording (2026-10-14)
     S = BeautifulSoup(raw, 'html.parser')
     sec = lambda i: S.find(id=i)
     head = raw.split('<body>')[0]
@@ -62,7 +64,7 @@ def build(lang):
     comp_h3 = inner(cv.select_one('.cstrip-left h3'))
     comps = [txt(c) for c in cv.select('.comp-item')]
     why_h3 = inner(cv.select_one('.cstrip-right h3')); why_p = inner(cv.select_one('.cstrip-right p'))
-    crows = [(inner(r.find_all('span')[0]), inner(r.select_one('.cstat-val'))) for r in cv.select('.cstat-row')]
+    crows = [inner(r.find_all('span')[-1]) for r in cv.select('.cstat-row')]
 
     ee = sec('end-to-end')
     ee_h2, ee_p, ee_key = txt(ee.h2), inner(ee.select_one('.section-header p')), inner(ee.select_one('.key-message'))
@@ -152,7 +154,7 @@ def build(lang):
 <p class="intro-lead rv">{intro_lead}</p>
 <ul class="intro-mini">''' + ''.join(f'<li class="rv"><span class="ico">{ic}</span><span><strong>{t}</strong> {p}</span></li>' for ic, t, p in intro_cards) + '''</ul>
 </div>
-<div class="intro-stats">''' + ''.join(f'<div class="stat rv"><div class="stat-big">{n}</div><span class="stat-line"></span><div class="stat-desc">{l}</div></div>' for n, l in stats) + '''</div>
+<div class="intro-stats">''' + ''.join(f'<div class="stat rv"><div class="stat-big">{n}</div><span class="stat-line"></span>' + (f'<div class="stat-desc">{l}</div>' if l else '') + '</div>' for n, l in stats) + '''</div>
 </div>
 </section>
 ''')
@@ -223,7 +225,7 @@ def build(lang):
 <div class="wrap">
 <div class="grid-cat"><p class="label rv"><span class="label-line"></span>{comp_h3}</p>
 <div class="hair-grid hg-4">''' + ''.join(f'<div class="hg-cell rv"><span class="hg-n mono">{i+1:02d}</span>{c.replace("&", "&amp;")}</div>' for i, c in enumerate(comps)) + f'''</div>
-<div class="why-pricing rv"><h3>{why_h3}</h3><p>{why_p}</p><dl>''' + ''.join(f'<div><dt>{a}</dt><dd class="mono">{b}</dd></div>' for a, b in crows) + f'''</dl></div>
+<div class="why-pricing rv"><h3>{why_h3}</h3><p>{why_p}</p><ul class="claim-list">''' + ''.join(f'<li><span class="claim-tick" aria-hidden="true"></span>{a}</li>' for a in crows) + f'''</ul></div>
 </div>
 <div class="grid-cat">{two_tone(of_h2, 'h2', 'display-3')}<p class="grid-lead rv">{of_p}</p>
 <div class="hair-grid hg-2">''' + ''.join(f'<div class="hg-col rv"><h3>{t}</h3><ul>' + ''.join(f'<li>{x}</li>' for x in li) + '</ul></div>' for t, li in of_blocks) + f'''</div>
@@ -237,7 +239,7 @@ def build(lang):
 <div class="wrap">
 <div class="list-head">{two_tone(tc_h2, 'h2', 'display-2 on-dark')}<p class="rv">{tc_p}</p></div>
 <ul class="rows">''' + ''.join(f'<li class="row rv"><span class="row-meta mono">{i+1:02d}</span><h3>{t}</h3><p>{p}</p><span class="row-arrow">{arrow}</span></li>' for i, (t, p) in enumerate(tcs)) + '''</ul>
-<div class="list-bar">''' + ''.join(f'<div class="rv"><span class="mono">{a}</span><span>{b}</span></div>' for a, b in tbar) + '''</div>
+<div class="list-bar">''' + ''.join(f'<div class="rv"><span class="claim-big">{a}</span>' + (f'<span>{b}</span>' if b else '') + '</div>' for a, b in tbar) + '''</div>
 </div>
 </section>
 ''')

@@ -148,7 +148,7 @@ ul, ol { list-style: none; }
 .intro-mini strong { color: var(--fg); font-weight: 600; display: block; }
 .ico svg, .svc-ico svg { width: 22px; height: 22px; color: var(--primary); flex: none; }
 .stat { padding: 22px 0; }
-.stat-big { font-size: clamp(1.8rem, 1rem + 2.4vw, 3.2rem); font-weight: 650; letter-spacing: -.035em; line-height: 1; }
+.stat-big { font-size: clamp(1.5rem, .9rem + 1.8vw, 2.5rem); text-wrap: balance; hyphens: manual; font-weight: 650; letter-spacing: -.035em; line-height: 1; }
 .stat-line { display: block; height: 1px; background: var(--line-2); margin: 16px 0 10px; transform: scaleX(0); transform-origin: left; transition: transform 1.2s .25s var(--e-out); }
 .stat.in .stat-line { transform: scaleX(1); }
 .stat-desc { font-size: .9rem; color: var(--fg-3); }
@@ -284,11 +284,13 @@ ul, ol { list-style: none; }
 .why-pricing { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 48px; }
 .why-pricing h3 { font-size: 1.2rem; text-transform: uppercase; grid-column: 1; }
 .why-pricing p { color: var(--fg-2); grid-column: 1; }
-.why-pricing dl { grid-column: 2; grid-row: 1 / span 2; }
+.why-pricing .claim-list { grid-column: 2; grid-row: 1 / span 2; }
+.claim-list li { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line); font-size: 1.05rem; font-weight: 600; }
+.claim-tick { flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--primary); box-shadow: 0 0 0 5px rgba(31,99,204,.15); }
 .why-pricing dl div { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-top: 1px solid var(--line); font-size: .92rem; }
 .why-pricing dd { text-align: right; }
 .grid-glow { position: absolute; left: 0; right: 0; bottom: 0; height: 200px; background: radial-gradient(60% 100% at 50% 100%, rgba(3,122,226,.55), rgba(3,122,226,0)), linear-gradient(transparent 60%, var(--ink)); pointer-events: none; }
-@media (max-width: 900px) { .hg-4 { grid-template-columns: repeat(2, 1fr); } .hg-2, .why-pricing { grid-template-columns: 1fr; } .why-pricing dl { grid-column: 1; grid-row: auto; } }
+@media (max-width: 900px) { .hg-4 { grid-template-columns: repeat(2, 1fr); } .hg-2, .why-pricing { grid-template-columns: 1fr; } .why-pricing .claim-list { grid-column: 1; grid-row: auto; } }
 
 /* ── 7 DARK LIST ── */
 .s-list { position: relative; background: var(--ink); color: #fff; padding: clamp(80px, 10vw, 150px) 0; }
@@ -305,7 +307,7 @@ ul, ol { list-style: none; }
 .row:hover .row-arrow { transform: translateX(8px); }
 .list-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 56px; }
 .list-bar div { display: flex; flex-direction: column; gap: 4px; font-size: .85rem; color: rgba(255,255,255,.6); }
-.list-bar .mono { color: #fff; font-size: 1.05rem; }
+.list-bar .claim-big { color: #fff; font-size: clamp(1.1rem, .8rem + .9vw, 1.6rem); font-weight: 600; text-transform: uppercase; letter-spacing: -.015em; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.2); }
 @media (max-width: 900px) { .list-head { grid-template-columns: 1fr; } .row { grid-template-columns: 40px 1fr; } .row p { grid-column: 2; } .row-arrow { display: none; } .list-bar { grid-template-columns: 1fr 1fr; } 
 /* ── 8 FAQ ── */
 .s-faq { background: #fff; padding: clamp(80px, 10vw, 150px) 0; }
