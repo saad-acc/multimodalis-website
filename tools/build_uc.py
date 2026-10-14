@@ -104,6 +104,16 @@ def build(lang):
     tbox = ct.select_one('.tagline-box')
     form_box = ct.select_one('.form-box')
 
+    # Neutral contact note (Saad, 2026-10-14): no email, form stays inactive
+    note_en = "Demo requests will open soon. The form is not active yet and does not transmit any data."
+    note_de = "Demo-Anfragen werden in Kürze möglich sein. Das Formular ist noch nicht aktiv und überträgt keine Daten."
+    note = note_de if lang == "de" else note_en
+    form_box = BeautifulSoup(str(form_box), "html.parser")
+    fn = form_box.select_one(".form-note, #form-note")
+    if fn:
+        fn.clear(); fn.append(note); fn["id"] = "form-note"; fn["class"] = ["form-note"]
+    form_box = form_box.decode_contents()
+
     ft = S.find('footer')
     f_brand_p = inner(ft.select_one('.footer-brand p'))
     f_cols = ft.select('.footer-col-title')

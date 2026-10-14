@@ -824,3 +824,7 @@ h2 { font-size: clamp(1.75rem, 1.2rem + 2.2vw, 2.6rem); }
 .chain-list.numbered { counter-reset: step; }
 .chain-list.numbered li::before { counter-increment: step; content: counter(step); font-family: var(--font-mono); color: var(--primary); font-size: 0.85rem; min-width: 1.2em; }
 .feature-cta { margin-top: 24px; }
+
+.legal-src { font-size: 0.9rem; color: var(--fg-3); border-left: 3px solid var(--border-strong); padding-left: 12px; }
+.legal-list { padding-left: 1.4em; list-style: decimal; }
+.legal-list li { margin: 6px 0; }
