@@ -306,11 +306,7 @@ ul, ol { list-style: none; }
 .list-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 56px; }
 .list-bar div { display: flex; flex-direction: column; gap: 4px; font-size: .85rem; color: rgba(255,255,255,.6); }
 .list-bar .mono { color: #fff; font-size: 1.05rem; }
-.row-float { position: fixed; left: 0; top: 0; width: 280px; aspect-ratio: 16 / 10; z-index: 30; pointer-events: none; border-radius: 10px; overflow: hidden; opacity: 0; transform: translate3d(var(--fx, 0), var(--fy, 0), 0) scale(.85); transition: opacity .4s var(--e-out), transform .5s var(--e-out); }
-.row-float.on { opacity: 1; transform: translate3d(var(--fx, 0), var(--fy, 0), 0) scale(1); }
-.row-float img { width: 100%; height: 100%; object-fit: cover; }
-@media (max-width: 900px) { .list-head { grid-template-columns: 1fr; } .row { grid-template-columns: 40px 1fr; } .row p { grid-column: 2; } .row-arrow { display: none; } .list-bar { grid-template-columns: 1fr 1fr; } .row-float { display: none; } }
-
+@media (max-width: 900px) { .list-head { grid-template-columns: 1fr; } .row { grid-template-columns: 40px 1fr; } .row p { grid-column: 2; } .row-arrow { display: none; } .list-bar { grid-template-columns: 1fr 1fr; } 
 /* ── 8 FAQ ── */
 .s-faq { background: #fff; padding: clamp(80px, 10vw, 150px) 0; }
 .faq-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: clamp(40px, 6vw, 100px); }
@@ -384,8 +380,7 @@ ul, ol { list-style: none; }
   .stat-line, .label-line { transform: none !important; }
   .s-hero { height: auto; } .s-hero-stick { position: relative; }
   .svc-pin { height: auto; } .svc-stick { position: relative; height: auto; }
-  .svc-marquee, .svc-stage, .uc-plane, .chain-dot, .cursor, .curtain, .row-float { display: none !important; }
-  .svc-mode { display: block !important; }
+  .svc-marquee, .svc-stage, .uc-plane, .chain-dot, .cursor, .curtain,   .svc-mode { display: block !important; }
   .why-pin { height: auto; } .why-stick { position: relative; height: auto; padding: 96px 0; } .why-route { display: none; }
   .ft-word span { -webkit-mask-image: none; mask-image: none; }
   .uc-card:nth-child(even) { transform: none !important; }

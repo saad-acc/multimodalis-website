@@ -233,14 +233,12 @@ def build(lang):
 </section>
 ''')
     # 7 INSIGHTS -> technology dark list
-    imgs = [m[0] for m in modes]
     w(f'''<section class="s-list" id="technology">
 <div class="wrap">
 <div class="list-head">{two_tone(tc_h2, 'h2', 'display-2 on-dark')}<p class="rv">{tc_p}</p></div>
-<ul class="rows">''' + ''.join(f'<li class="row rv" data-img="{imgs[i % 4]}"><span class="row-meta mono">{i+1:02d}</span><h3>{t}</h3><p>{p}</p><span class="row-arrow">{arrow}</span></li>' for i, (t, p) in enumerate(tcs)) + '''</ul>
+<ul class="rows">''' + ''.join(f'<li class="row rv"><span class="row-meta mono">{i+1:02d}</span><h3>{t}</h3><p>{p}</p><span class="row-arrow">{arrow}</span></li>' for i, (t, p) in enumerate(tcs)) + '''</ul>
 <div class="list-bar">''' + ''.join(f'<div class="rv"><span class="mono">{a}</span><span>{b}</span></div>' for a, b in tbar) + '''</div>
 </div>
-<div class="row-float" aria-hidden="true"><img alt="" src="'''+imgs[0]+'''" width="320" height="200" loading="lazy"></div>
 </section>
 ''')
     # 8 FAQ

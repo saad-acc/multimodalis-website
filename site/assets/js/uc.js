@@ -117,22 +117,16 @@
     lastY = sy;
   }
 
-  /* Custom cursor (fine pointers only) + hover thumbnail on dark list rows */
+  /* Custom cursor (fine pointers only) */
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     var cur = D.querySelector('.cursor'), dot = D.querySelector('.cursor-dot'), ring = D.querySelector('.cursor-ring');
     var mx = -100, my = -100, rx = -100, ry = -100;
-    var flt = D.querySelector('.row-float'), fimg = flt && flt.querySelector('img'), fx = 0, fy = 0;
     window.addEventListener('mousemove', function (e) { mx = e.clientX; my = e.clientY; }, { passive: true });
     D.addEventListener('mouseover', function (e) { cur.classList.toggle('hov', !!e.target.closest('a, button, .row, .hg-cell')); });
-    D.querySelectorAll('.row').forEach(function (row) {
-      row.addEventListener('mouseenter', function () { if (fimg.getAttribute('src') !== row.dataset.img) fimg.src = row.dataset.img; flt.classList.add('on'); });
-      row.addEventListener('mouseleave', function () { flt.classList.remove('on'); });
-    });
     (function loop() {
-      rx += (mx - rx) * .18; ry += (my - ry) * .18; fx += (mx + 24 - fx) * .1; fy += (my - 90 - fy) * .1;
+      rx += (mx - rx) * .18; ry += (my - ry) * .18;
       dot.style.transform = 'translate3d(' + mx + 'px,' + my + 'px,0)';
       ring.style.transform = 'translate3d(' + rx + 'px,' + ry + 'px,0)';
-      if (flt) { flt.style.setProperty('--fx', fx + 'px'); flt.style.setProperty('--fy', fy + 'px'); }
       requestAnimationFrame(loop);
     })();
   }
