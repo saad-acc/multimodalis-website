@@ -835,3 +835,59 @@ h2 { font-size: clamp(1.75rem, 1.2rem + 2.2vw, 2.6rem); }
 .legal h4 { margin-top: 16px; }
 .legal-list { padding-left: 1.4em; list-style: decimal; }
 .legal-list li { margin: 6px 0; }
+
+/* ── Demo form: hint, honeypot, status ── */
+.form-fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.form-hint { font-size: 0.85rem; color: rgba(255,255,255,0.72); line-height: 1.6; margin-bottom: 20px; }
+.form-hint a { color: var(--accent-on-dark); text-decoration: underline; }
+.form-hp { position: absolute !important; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+.form-box form { position: relative; }
+.form-status { font-size: 0.9rem; line-height: 1.5; padding: 12px 14px; border-radius: var(--r-sm); margin: 8px 0 4px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); color: #FFFFFF; }
+.form-status-success { border-color: rgba(2,148,171,0.7); background: rgba(2,148,171,0.16); }
+.form-status-error { border-color: rgba(209,23,103,0.75); background: rgba(209,23,103,0.16); }
+.submit-btn:disabled { opacity: 0.6; cursor: progress; }
+
+/* ── Mobile spacing (Saad, 2026-11-03): one page gutter, lighter nested padding ──
+   Phones only (<= 640px, the existing mobile breakpoint); desktop and tablet unchanged.
+   --gutter-m is local to this block, not a brand token. */
+@media (max-width: 640px) {
+  :root { --gutter-m: 20px; }
+  .container { padding: 0 var(--gutter-m); }
+  .nav-inner { padding: 14px var(--gutter-m); gap: 8px; }
+  .lang-toggle { gap: 2px; }
+  #mobile-menu { padding: 20px var(--gutter-m); }
+
+  .hero { padding: 40px 0 56px; }
+  .section { padding: 56px 0; }
+  .legal { padding: 48px 0; }
+  footer { padding: 56px 0; }
+  .section-header { margin-bottom: var(--sp-md); }
+  .intro-header { gap: 24px; margin-bottom: var(--sp-md); }
+  .coverage-header, .modes-grid { margin-bottom: var(--sp-md); }
+
+  .grid-2, .grid-3, .grid-4, .grid-6 { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .platform-grid, .modes-grid { gap: 16px; }
+  .footer-inner { gap: var(--sp-sm); margin-bottom: var(--sp-md); }
+
+  /* cards: one inner inset instead of 32–40px */
+  .platform-card, .usecase-card, .tech-card, .hero-card { padding: 24px 20px; }
+  .mode-body { padding: 20px 20px 24px; }
+  .cstrip-left, .cstrip-right { padding: 24px 20px; }
+  .chain-col { padding: 28px 20px; }
+  .chain-footer { padding: 16px 20px; }
+  .stat-bar-item { padding: 20px; }
+  .faq-toggle { padding: 20px 16px; }
+  .faq-content { padding: 0 16px 20px; }
+
+  /* contact: dark panel runs edge to edge so the form box is the only inset */
+  .contact-inner { margin: 0 calc(-1 * var(--gutter-m)); border-radius: 0; padding: 40px var(--gutter-m); }
+  .tagline-box { padding: 20px; }
+  .form-box { padding: 24px 16px; }
+  .form-box h3 { margin-bottom: 20px; }
+
+  /* long button labels wrap instead of widening their card */
+  .feature-cta { white-space: normal; text-align: center; }
+  /* tap targets >= 44px (were 30x33 / 32x35) */
+  .mobile-toggle { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+  .lang-btn { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+}

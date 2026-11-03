@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; font-src 'self'; connect-src 'self' https://bestmodal.de; object-src 'none'; base-uri 'self'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Multimodalis – Pricing Engine for Transport Logistics</title>
 <meta name="description" content="Rank door-to-door landed cost — not the ocean or road line alone. FCL, LCL, FTL, LTL, rail/truck and barge/truck intermodal, and air, with surcharges, locals and FX in one comparable price.">
@@ -19,6 +19,7 @@
 <link rel="preload" href="assets/fonts/multimodalis-Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/site.css">
 <script src="assets/js/main.js" defer></script>
+<script src="assets/js/form.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -552,31 +553,34 @@ What Multimodalis Does
 </div>
 <div class="form-box">
 <h3>Request a demo</h3>
-<form aria-describedby="form-note" id="contact-form"><p class="form-note" id="form-note">Demo requests will open soon. The form is not active yet and does not transmit any data.</p><fieldset class="form-fieldset" disabled="">
+<form aria-describedby="form-note" id="contact-form" data-endpoint="https://bestmodal.de/send_mail_multimodalis.php"><p class="form-hint" id="form-note">Your request is sent by email to the Multimodalis team. Fields marked * are required. Details on data processing: <a href="en/privacy/">privacy policy</a>.</p><noscript><p class="form-note">Please enable JavaScript to send the form.</p></noscript><fieldset class="form-fieldset" disabled="">
+<input name="lang" type="hidden" value="en"/><input name="_timestamp" type="hidden" value=""/>
+<div class="form-hp" aria-hidden="true"><label for="website">Leave this field empty</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off" value=""/></div>
 <div class="form-row form-field">
 <div>
 <label class="field-label" for="name">Name *</label>
-<input class="field-input" id="name" name="name" placeholder="" required="" type="text"/>
+<input class="field-input" autocomplete="name" id="name" name="name" placeholder="" required="" type="text"/>
 </div>
 <div>
 <label class="field-label" for="company">Company *</label>
-<input class="field-input" id="company" name="company" placeholder="" required="" type="text"/>
+<input class="field-input" autocomplete="organization" id="company" name="company" placeholder="" required="" type="text"/>
 </div>
 </div>
 <div class="form-row form-field">
 <div>
 <label class="field-label" for="email">E-Mail *</label>
-<input class="field-input" id="email" name="email" placeholder="" required="" type="email"/>
+<input class="field-input" autocomplete="email" id="email" name="email" placeholder="" required="" type="email"/>
 </div>
 <div>
 <label class="field-label" for="phone">Phone</label>
-<input class="field-input" id="phone" name="phone" placeholder="" type="tel"/>
+<input class="field-input" autocomplete="tel" id="phone" name="phone" placeholder="" type="tel"/>
 </div>
 </div>
 <div class="form-field">
 <label class="field-label" for="message">Message</label>
 <textarea class="field-input" id="message" name="message" placeholder="Tell us about your pricing setup, modes, regions or current challenges..." rows="4"></textarea>
 </div>
+<p class="form-status" id="form-status" role="status" aria-live="polite" hidden=""></p>
 <button class="submit-btn" type="submit">Request Demo</button>
 </fieldset></form>
 </div>

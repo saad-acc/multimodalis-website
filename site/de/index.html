@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; font-src 'self'; connect-src 'self' https://bestmodal.de; object-src 'none'; base-uri 'self'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Multimodalis – Pricing Engine für Transportlogistik</title>
 <meta name="description" content="Bewerten Sie den Tür-zu-Tür-Landed-Cost — nicht nur die See- oder Straßenzeile. FCL, LCL, FTL, LTL, Bahn/Lkw- und Binnenschiff/Lkw-Intermodal sowie Luft, mit Zuschlägen, Lokalkosten und FX in einem vergleichbaren Preis.">
@@ -19,6 +19,7 @@
 <link rel="preload" href="../assets/fonts/multimodalis-Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/css/site.css">
 <script src="../assets/js/main.js" defer></script>
+<script src="../assets/js/form.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Zum Inhalt springen</a>
@@ -552,31 +553,34 @@ Was Multimodalis leistet
 </div>
 <div class="form-box">
 <h3>Demo anfragen</h3>
-<form aria-describedby="form-note" id="contact-form"><p class="form-note" id="form-note">Demo-Anfragen werden in Kürze möglich sein. Das Formular ist noch nicht aktiv und überträgt keine Daten.</p><fieldset class="form-fieldset" disabled="">
+<form aria-describedby="form-note" id="contact-form" data-endpoint="https://bestmodal.de/send_mail_multimodalis.php"><p class="form-hint" id="form-note">Ihre Anfrage wird per E-Mail an das Multimodalis-Team gesendet. Mit * markierte Felder sind Pflichtfelder. Hinweise zur Datenverarbeitung: <a href="./datenschutz/">Datenschutzerklärung</a>.</p><noscript><p class="form-note">Bitte aktivieren Sie JavaScript, um das Formular zu senden.</p></noscript><fieldset class="form-fieldset" disabled="">
+<input name="lang" type="hidden" value="de"/><input name="_timestamp" type="hidden" value=""/>
+<div class="form-hp" aria-hidden="true"><label for="website">Dieses Feld bitte leer lassen</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off" value=""/></div>
 <div class="form-row form-field">
 <div>
 <label class="field-label" for="name">Name *</label>
-<input class="field-input" id="name" name="name" placeholder="" required="" type="text"/>
+<input class="field-input" autocomplete="name" id="name" name="name" placeholder="" required="" type="text"/>
 </div>
 <div>
 <label class="field-label" for="company">Unternehmen *</label>
-<input class="field-input" id="company" name="company" placeholder="" required="" type="text"/>
+<input class="field-input" autocomplete="organization" id="company" name="company" placeholder="" required="" type="text"/>
 </div>
 </div>
 <div class="form-row form-field">
 <div>
 <label class="field-label" for="email">E-Mail *</label>
-<input class="field-input" id="email" name="email" placeholder="" required="" type="email"/>
+<input class="field-input" autocomplete="email" id="email" name="email" placeholder="" required="" type="email"/>
 </div>
 <div>
 <label class="field-label" for="phone">Telefon</label>
-<input class="field-input" id="phone" name="phone" placeholder="" type="tel"/>
+<input class="field-input" autocomplete="tel" id="phone" name="phone" placeholder="" type="tel"/>
 </div>
 </div>
 <div class="form-field">
 <label class="field-label" for="message">Nachricht</label>
 <textarea class="field-input" id="message" name="message" placeholder="Erzählen Sie uns etwas über Ihr Pricing-Setup, Verkehrsträger, Regionen oder aktuelle Herausforderungen..." rows="4"></textarea>
 </div>
+<p class="form-status" id="form-status" role="status" aria-live="polite" hidden=""></p>
 <button class="submit-btn" type="submit">Demo anfragen</button>
 </fieldset></form>
 </div>

@@ -1,4 +1,4 @@
-/* Multimodalis site script — no cookies, no storage, no network requests. */
+/* Multimodalis site script — no cookies, no storage, no network requests (the demo form lives in form.js). */
 (function () {
   var doc = document.documentElement;
   doc.classList.add('js');

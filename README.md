@@ -12,6 +12,7 @@ site/                     # deployable static output (plain HTML/CSS/JS, no buil
   404.html  robots.txt  sitemap.xml  site.webmanifest  favicon.ico  .nojekyll
   assets/css/site.css     # Multimodalis tokens (see tokens.json), Geist fonts
   assets/js/main.js       # menu, typewriter, FAQ, fade-in (no cookies, no storage, no network)
+  assets/js/form.js       # demo form: fetch POST to the form endpoint (no cookies, no storage)
   assets/js/globe.js      # hero globe (three.js r128)
   assets/js/three.r128.min.js
 .github/workflows/deploy.yml   # Pages workflow, manual trigger only until publishing is approved
@@ -21,7 +22,7 @@ qa/                       # pre-publish QA reports
 All internal links are relative, so the site works both as a project page (`/<repo>/`) and on a custom domain. Canonical/hreflang/OG/JSON-LD/sitemap/robots URLs use `https://multimodalis.com`; the 404 page uses root-absolute paths (`/assets/…`), so it only works at the domain root.
 
 ## Privacy
-No cookies, no localStorage, no analytics, no third-party requests: fonts, scripts and images are all self-hosted. A Content-Security-Policy meta tag restricts everything to `'self'`. The demo form is disabled (endpoint to be decided).
+No cookies, no localStorage, no analytics, no third-party requests except the demo-form submission (only when a visitor sends it): fonts, scripts and images are all self-hosted. A Content-Security-Policy meta tag restricts everything to `'self'`; the three pages with the demo form also allow `connect-src https://bestmodal.de` for the form endpoint (`site/assets/js/form.js`, fetch without cookies; endpoint source kept outside this repo). Without JavaScript the form stays disabled (`form-action 'none'`).
 
 ## Third-party code, fonts and assets — provenance
 | File | Source | Licence | Notes |
